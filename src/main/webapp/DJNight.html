@@ -9,12 +9,12 @@
 
         body {
             margin: 0;
-            font-family: 'Orbitron', sans-serif;
             background: linear-gradient(to right, #000000, #1f1c2c);
-            color: #00ffe5;
         }
         header {
             background-color: #111;
+            color: #00ffe5;
+            font-family: 'Orbitron', sans-serif;
             padding: 1.5rem;
             font-size: 2rem;
             text-align: center;
@@ -23,6 +23,8 @@
         }
         .container {
             max-width: 800px;
+            color: #00ffe5;
+            font-family: 'Orbitron', sans-serif;
             margin: auto;
             text-align: center;
             padding: 2rem;
@@ -61,13 +63,75 @@
             border-radius: 15px;
             box-shadow: 0 0 20px #00ffe5;
         }
+        .description {
+            padding: 1.5rem;
+            border-left: 6px solid #1976d2;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            color: #fff;
+        }
+
+        .description h2 {
+            margin-top: 0;
+        }
+
+        .description ul {
+            padding-left: 1.2rem;
+        }
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
 <header>
-    🌟 Cyber DJ: Neon Night Playlist 🌟
+    🌟 Cyber DJ: Iterator Design Pattern 🌟
 </header>
+<div class="description">
+    <p><strong>📘 Scenario:</strong></p>
+    <p>
+        A DJ app manages multiple playlists like <em>"House Classics"</em> and <em>"Chill Vibes"</em>. Internally, each playlist might use a different storage mechanism (like an array, ArrayList, or set),
+        but the DJ simply wants to play through the songs one-by-one without worrying about how they’re stored.
+    </p>
 
+    <p><strong>⚠️ Problem:</strong></p>
+    <ul>
+        <li>Each playlist uses a different data structure to store songs.</li>
+        <li>The DJ app has to know internal details of every playlist type to loop through songs.</li>
+        <li>This violates encapsulation and makes code harder to maintain or extend.</li>
+    </ul>
+
+    <p><strong>💡 Iterator Pattern Solution:</strong></p>
+    <p>
+        We define a common <code>Iterator</code> interface that provides methods like <code>hasNext()</code> and <code>next()</code>.
+        Each playlist type implements this interface, allowing the DJ to step through songs uniformly—without needing to know how the playlist stores its data internally.
+    </p>
+
+    <div class="uml-image">
+        <img src="images/Iterator.png" alt="Iterator Pattern UML">
+    </div>
+
+    <p><strong>🖥️ Output:</strong></p>
+    <pre>
+=== DJ Playlist ===
+Now playing: "Levels" by Avicii
+Now playing: "Strobe" by deadmau5
+  </pre>
+
+    <a href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/85a7df5f251c3dcae0e95d6c25f0e5d207291edb/src/main/java/com/tharindu/oodp1/Iterator/IteratorDemo.java" target="_blank">
+        <button>🔗 View Code on GitHub</button>
+    </a>
+</div>
 <div class="container">
     <h2>🎵 Now Playing...</h2>
     <div id="log">Press "Start Playlist" to begin.

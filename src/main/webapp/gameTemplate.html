@@ -20,7 +20,7 @@
 
         h1 {
             text-align: center;
-            font-size: 3rem;
+            font-size: 2rem;
             margin-bottom: 2rem;
             color: #f5c518;
             text-shadow: 2px 2px #000;
@@ -82,9 +82,131 @@
             margin-left: auto;
             margin-right: auto;
         }
+        .description {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1.5rem;
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .description h2 {
+            margin-top: 0;
+        }
+
+        .description ul {
+            padding-left: 1.2rem;
+        }
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            padding: 1rem 2rem;
+            background-color: #0f0f0f;
+            /* new: center contents */
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 64px;
+            height: auto;
+        }
+
     </style>
 </head>
 <body>
+<header>
+    <div class="header-inner">
+        <img class="logo" src="https://cdn-icons-png.flaticon.com/512/8989/8989438.png" alt="battle Logo">
+        <h1>Template Method Design Pattern: Realm Defenders</h1>
+    </div>
+</header>
+<div class="description">
+    <p><strong>📘 Scenario:</strong></p>
+    <p>
+        In the mystical kingdom of <em>Aurelia</em>, every hero follows a sacred and structured ritual before, during, and after a battle:
+    <ol>
+        <li>Prepare: wear armor or channel magical energy</li>
+        <li>Engage: strike or cast spells against foes</li>
+        <li>Defend: block attacks or raise magical shields</li>
+        <li>Celebrate: rejoice or reflect after victory</li>
+    </ol>
+    Although all heroes follow the same ritual sequence, different types of heroes (Warrior, Mage, Archer) customize how they perform each step.
+    </p>
+
+    <p><strong>⚠️ Problem:</strong></p>
+    <ul>
+        <li>Each hero class contains similar steps, but implemented differently.</li>
+        <li>Duplicating the ritual flow across all hero types leads to repetitive and fragile code.</li>
+        <li>Making changes to the battle ritual would require editing every subclass.</li>
+    </ul>
+
+    <p><strong>💡 Template Method Solution:</strong></p>
+    <p>
+        The base <code>Hero</code> class defines the skeleton of the ritual as a final method, calling abstract or overridable steps like <code>prepare()</code>, <code>engage()</code>, etc.
+        Subclasses like <code>Warrior</code>, <code>Mage</code>, and <code>Archer</code> only override the specific steps that differ, ensuring consistent structure while allowing customization.
+    </p>
+
+    <div class="uml-image">
+        <img src="images/TemplateMethod.png" alt="Template Method Pattern UML">
+    </div>
+
+    <p><strong>🖥️ Output:</strong></p>
+    <pre>
+=== Warrior’s Ritual ===
+[Warrior] Donning heavy armor and readying sword.
+[Warrior] Charges forward with a battle cry!
+[Warrior] Raises shield to block incoming blows.
+[Warrior] Roars victoriously and pounds chest.
+
+=== Mage’s Ritual ===
+[Mage] Chanting incantations and gathering mana.
+[Mage] Hurls a blazing fireball at the enemy!
+[Mage] Conjures a shimmering magical barrier.
+
+=== Archer’s Ritual ===
+[Archer] Docking arrow and adjusting quiver.
+[Archer] Fires a volley of arrows with deadly precision.
+[Archer] Dodges and keeps distance from foes.
+[Archer] Salutes enemy before vanishing into the trees.
+  </pre>
+
+    <div style="margin-top:1rem;">
+        <a
+                href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/85a7df5f251c3dcae0e95d6c25f0e5d207291edb/src/main/java/com/tharindu/oodp1/Template/TemplateMethodDemo.java"
+                target="_blank"
+                style="
+        display: inline-block;
+        padding: 0.6rem 1.2rem;
+        background-color: #24292e;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        font-family: 'Segoe UI', sans-serif;
+      "
+        >
+            🔗 View Code on GitHub
+        </a>
+    </div>
+</div>
+
 <div class="overlay">
     <h1>⚔️ Hero Battle Rituals</h1>
 

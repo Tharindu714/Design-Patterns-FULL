@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Call of Duty Weapon Shop</title>
+    <title>Factory Design Pattern - Call of Duty </title>
     <style>
         body {
             margin: 0;
             font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(to right, #0f0f0f, #1c1c1c);
             color: white;
-            text-align: center;
         }
         header {
             background: #202020;
-            padding: 1rem;
-            font-size: 2rem;
+            font-size: 1.5rem;
             color: #f39c12;
             font-weight: bold;
+            display: flex;
+            justify-content: center;
         }
         .carousel {
             display: flex;
@@ -57,12 +57,140 @@
             white-space: pre-wrap;
             border: 1px solid #444;
         }
+        .description {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .description h2 {
+            margin-top: 0;
+        }
+
+        .description ul {
+            padding-left: 1.2rem;
+        }
+
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 64px;
+            height: auto;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
 <header>
-    CALL OF DUTY: Weapon Factory
+    <div class="header-inner">
+        <img class="logo" src="https://static.vecteezy.com/system/resources/thumbnails/043/660/593/small_2x/assault-rifle-on-isolated-background-png.png" alt="Factory Pattern Icon" width="60">
+        <h2>Factory Design Pattern: Battle Sim VR</h2>
+    </div>
 </header>
+<div class="description">
+    <h2>📘 Scenario:</h2>
+    <p>
+        You're a new recruit entering a top-secret <strong>Virtual Reality military simulator</strong> used to train elite Special Forces.
+        As you load in, the AI Drill Sergeant roars:
+        <em>“Soldier! You don’t bring your own weapons here. We equip you based on mission needs.”</em> 🪖
+    </p>
+    <p>
+        The <strong>Weapon Assembly Console</strong> — powered by the <code>GunFactory</code> — takes care of everything.
+        Just call out your desired weapon, and it equips you instantly with the perfect loadout for the mission.
+    </p>
+
+    <ul>
+        <li style="background-color: #1e1d1d">🔧 <strong>Mission 1: Urban Ambush</strong><br>
+            You say: “Give me a Pistol!”<br>
+            ➤ The factory loads a lightweight, fast-reacting pistol, and you fire: <code≯̸̱͂ ̸͆̿͞ ̄̿̄͞</code>
+        </li>
+        <br/>
+        <li style="background-color: #1e1d1d">🔧 <strong>Mission 2: Frontline WarZone</strong><br>
+            You shout: “Deploy a Rifle and Shotgun!”<br>
+            ➤ Mid-range rifle: <code>▄︻デ╦═一━</code><br>
+            ➤ Up-close shotgun: <code>⌐╦╦═─</code>
+        </li>
+        <br/>
+        <li style="background-color: #1e1d1d">🔧 <strong>Mission 3: Jungle Siege</strong><br>
+            Commander says: “We’re behind enemy lines. Time to go loud.”<br>
+            You call out: “Bring me the AK47 and the Sniper Rifle!”<br>
+            ➤ AK47: <code>▄︻╦芫≡══--</code><br>
+            ➤ Sniper Rifle: <code>︻╦̵̵̿╤━─</code>
+        </li>
+    </ul>
+
+    <p><strong>Problem:</strong></p>
+    <p>
+        If each weapon creation had its own logic scattered throughout the system, it would lead to duplicate code,
+        poor scalability, and high maintenance. Adding or modifying weapons would become a mess.
+    </p>
+
+    <p><strong>🏭 Factory Pattern Solution:</strong></p>
+    <p>
+        The <code>GunFactory</code> encapsulates weapon creation. It hides the construction details and provides
+        a clean interface to generate any weapon dynamically. You just ask — the factory builds and delivers.
+    </p>
+
+    <div class="uml-image">
+        <p><strong>UML Diagram:</strong></p>
+        <img src="images/Factory.png" alt="UML Diagram of Factory Pattern for Gun System"/>
+    </div>
+
+    <p><strong>Output:</strong></p>
+    <pre style="background:#1e1e1e; color:#d4d4d4; padding:1rem; border-radius:8px; overflow-x:auto; text-align: center;">
+=== Weapon Test Firing ===
+1️⃣ Firing Pistol:
+̸̸̱͂ ̸͆̿͞ ̄̿̄͞ ̿̅͞ ̿̅͞ ̄̚
+
+2️⃣ Firing Rifle:
+▄︻デ╦═一━
+
+3️⃣ Firing Shotgun:
+⌐╦╦═─
+
+4️⃣ Firing AK47:
+▄︻╦芫≡══--
+
+5️⃣ Firing Sniper Rifle:
+︻╦̵̵̿╤━─
+
+=== All weapons fired! ===
+    </pre>
+
+    <div style="margin-top:1rem;">
+        <a href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/e76b523066a830caef43706d2a8a5acc4abf53ed/src/main/java/com/tharindu/oodp1/Factory/GunFactory.java"
+           target="_blank" style="
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #01111c;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;">
+            🔗 View Code on GitHub
+        </a>
+    </div>
+</div>
 
 <section class="carousel">
     <div class="weapon-card">

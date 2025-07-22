@@ -13,9 +13,60 @@
       margin: 0;
       background: linear-gradient(to right, #1f4037, #016161);
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
+      padding-bottom: 2rem;
+    }
+
+    header {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: center;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo {
+      width: 64px;
+      height: auto;
+    }
+
+    .description {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      color: #fff;
+      padding: 1.5rem;
+      border-left: 6px solid #1976d2;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 800px;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .description h2 {
+      margin-top: 0;
+    }
+
+    .description ul {
+      padding-left: 1.2rem;
+    }
+
+    .uml-image {
+      margin: 1rem 0;
+      text-align: center;
+    }
+
+    .uml-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
 
     .container {
@@ -23,7 +74,8 @@
       backdrop-filter: blur(10px);
       border-radius: 15px;
       box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-      width: 500px;
+      width: 90%;
+      max-width: 500px;
       padding: 2rem;
       color: #fff;
     }
@@ -86,13 +138,76 @@
   </style>
 </head>
 <body>
+<div class="description">
+  <h2>🔐 Proxy Design Pattern: Database Access Control</h2>
+
+  <p><strong>📘 Scenario:</strong></p>
+  <p>
+    Imagine you are building a user management system with access to critical database operations like Insert, Update,
+    Delete, and Select. However, you want to restrict access so that only authorized users can perform these actions.
+    For example, only an admin with the correct username (<code><b>Tharindu</b></code>) and password (<code><b>deltaCodex8754</b></code>)
+    should be able to modify the data.
+  </p>
+  <p>
+    Without proper control, unauthorized users could execute sensitive commands. That’s where the Proxy pattern helps!
+  </p>
+
+  <p><strong>⚠️ Problem:</strong></p>
+  <ul>
+    <li>Direct access to the database class can be dangerous or insecure.</li>
+    <li>No authentication logic separates user access and core database logic.</li>
+    <li>This could result in untraceable or malicious queries by unauthorized users.</li>
+  </ul>
+
+  <p><strong>💡 Proxy Pattern Solution:</strong></p>
+  <p>
+    We create a <code>ProxyDatabase</code> class that wraps around the real <code>RealDatabase</code> and acts as a gatekeeper.
+    It performs authentication before delegating database operations. This keeps the core database logic clean and adds
+    an extra layer of security.
+  </p>
+
+  <div class="uml-image">
+    <img src="images/Proxy.png" alt="Proxy Pattern UML">
+  </div>
+
+  <p><strong>🖥️ Output:</strong></p>
+  <pre>
+[System] ✅ Login successful.
+[ProxyDatabase] ✅ Authenticated. Delegating insert().
+[RealDatabase] Inserting data into the database.
+[ProxyDatabase] ✅ Authenticated. Delegating update().
+[RealDatabase] Updating data in the database.
+[ProxyDatabase] ✅ Authenticated. Delegating delete().
+[RealDatabase] Deleting data from the database.
+[ProxyDatabase] ✅ Authenticated. Delegating select().
+[RealDatabase] Selecting data with query: SELECT * FROM users;
+    </pre>
+
+  <div style="margin-top:1rem;">
+    <a href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/85a7df5f251c3dcae0e95d6c25f0e5d207291edb/src/main/java/com/tharindu/oodp1/Proxy/MainProxy.java"
+       target="_blank" style="
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #00a16a;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;">
+      🔗 View Code on GitHub
+    </a>
+  </div>
+</div>
+
 <div class="container">
   <h2>🔐 Proxy DB Authentication</h2>
 
   <label for="username"></label><input type="text" id="username" placeholder="Username: e.g. Tharindu" />
   <p>Use Username as <b>"Tharindu"</b> to access all functions</p>
+
   <label for="password"></label><input type="password" id="password" placeholder="Password: e.g. deltaCodex8754" />
   <p>Use the password as <b>"deltaCodex8754"</b> to access all functions</p>
+
   <button onclick="login()">Login</button>
 
   <div class="operations" id="operations">
@@ -101,7 +216,8 @@
       <button onclick="update()">Update</button>
       <button onclick="del()">Delete</button>
     </div>
-    <textarea id="query" rows="2" placeholder="Write SELECT query..."></textarea>
+
+    <label for="query"></label><textarea id="query" rows="2" placeholder="Write SELECT query..."></textarea>
     <button onclick="select()">Execute Select</button>
   </div>
 
@@ -205,7 +321,7 @@
 
   function log(message) {
     const consoleBox = document.getElementById('console');
-    consoleBox.textContent += '\\n' + message;
+    consoleBox.textContent += '\n' + message;
     consoleBox.scrollTop = consoleBox.scrollHeight;
   }
 </script>

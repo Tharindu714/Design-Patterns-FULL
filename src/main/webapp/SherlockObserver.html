@@ -9,7 +9,6 @@
 
         body {
             margin: 0;
-            font-family: 'Spectral SC', serif;
             background: url('https://res.cloudinary.com/jerrick/image/upload/d_642250b563292b35f27461a7.png,f_jpg,fl_progressive,q_auto,w_1024/6698d0e97333af001ee35231.jpg') no-repeat center center fixed;
             background-size: cover;
             color: #f8f8f8;
@@ -26,6 +25,7 @@
         }
         .container {
             background-color: rgba(0, 0, 0, 0.7);
+            font-family: 'Spectral SC', serif;
             padding: 2rem;
             margin: 2rem auto;
             max-width: 900px;
@@ -64,12 +64,98 @@
             margin: 1rem auto;
             display: block;
         }
+        .description {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            font-size: 1.2rem;
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .description h2 {
+            margin-top: 0;
+        }
+
+        .description ul {
+            padding-left: 1.2rem;
+        }
+
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
 <header>
-    🕵️ Sherlock Observer - Crime Scene Tracker
+    🕵️ Observer Design pattern - Crime Scene Tracker
 </header>
+<div class="description">
+    <h2>🔍 Observer Design Pattern: The Case of the Whistling Typewriter</h2>
+
+    <p><strong>📘 Scenario:</strong></p>
+    <p>
+        In foggy Victorian London, Detective Marlowe is investigating eerie clues left by a ghost typing on an old typewriter in an abandoned manor.
+        Every time a new message appears, a trio of experts instantly react:
+    </p>
+    <ul>
+        <li>🧪 <strong>Forensic Analyst</strong> – checks the keys for ghostly fingerprints</li>
+        <li>🔮 <strong>Psychic Medium</strong> – listens intently for whispers hidden in the air</li>
+        <li>💻 <strong>Tech Geek</strong> – connects an Arduino to record the keystroke sequence</li>
+    </ul>
+    <p>
+        The typewriter acts as the <em>Subject</em>, and all three specialists are <em>Observers</em> that respond automatically whenever a new clue is typed.
+    </p>
+
+    <p><strong>⚠️ Problem:</strong></p>
+    <ul>
+        <li>Hard wiring the notification logic into the typewriter class couples it tightly with each observer.</li>
+        <li>Adding/removing observers requires modifying the typewriter’s internal logic.</li>
+        <li>No flexibility for runtime observer management.</li>
+    </ul>
+
+    <p><strong>💡 Observer Pattern Solution:</strong></p>
+    <p>
+        The typewriter implements a <code>Subject</code> interface, allowing observers to <code>subscribe()</code> and <code>unsubscribe()</code> dynamically.
+        Each observer implements an <code>Observer</code> interface and reacts to updates in its own unique way.
+        The Subject notifies all registered observers whenever a clue appears—promoting loose coupling and extensibility.
+    </p>
+
+    <div class="uml-image">
+        <img src="images/Observer.png" alt="Observer Design Pattern UML Diagram">
+    </div>
+
+    <p><strong>🖥️ Output:</strong></p>
+    <pre style="font-size: 0.8rem;"><code>
+[CrimeScene] New clue discovered: "MURDER AT MIDNIGHT"
+🧪 ForensicAnalyst: Dusting the keys for prints on clue → MURDER AT MIDNIGHT
+🔮 PsychicMedium: I hear whispers chanting 'MURDER AT MIDNIGHT'!
+💻 TechGeek: Arduino logged keystroke sequence: [MURDER AT MIDNIGHT]
+
+[CrimeScene] New clue discovered: "LOOK UNDER THE FLOORBOARD"
+🧪 ForensicAnalyst: Dusting the keys for prints on clue → LOOK UNDER THE FLOORBOARD
+🔮 PsychicMedium: I hear whispers chanting 'LOOK UNDER THE FLOORBOARD'!
+💻 TechGeek: Arduino logged keystroke sequence: [LOOK UNDER THE FLOORBOARD]
+
+[CrimeScene] New clue discovered: "THE BUTLER DID IT"
+🧪 ForensicAnalyst: Dusting the keys for prints on clue → THE BUTLER DID IT
+🔮 PsychicMedium: I hear whispers chanting 'THE BUTLER DID IT'!
+💻 TechGeek: Arduino logged keystroke sequence: [THE BUTLER DID IT]
+  </pre>
+
+    <a href="https://github.com/your-repo-link" target="_blank">
+        <button>🔗 View Code on GitHub</button>
+    </a>
+</div>
 
 <div class="container">
     <img class="detective" src="https://m.media-amazon.com/images/M/MV5BNjg3NjY5NGUtZTlkNS00NGE2LWJhMTAtZTlkZDgzZDBhOWY1XkEyXkFqcGc@._V1_.jpg" alt="Sherlock Holmes">
