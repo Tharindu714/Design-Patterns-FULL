@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Call of Duty Weapon Shop</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #0f0f0f, #1c1c1c);
+            color: white;
+            text-align: center;
+        }
+        header {
+            background: #202020;
+            padding: 1rem;
+            font-size: 2rem;
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 1rem;
+            justify-content: center;
+        }
+        .weapon-card {
+            background: #2c3e50;
+            padding: 1rem;
+            border-radius: 10px;
+            min-width: 200px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .weapon-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+        button {
+            background: #f39c12;
+            border: none;
+            padding: 0.5rem 1rem;
+            margin-top: 0.5rem;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #log {
+            margin: 2rem auto;
+            background: #111;
+            padding: 1rem;
+            border-radius: 10px;
+            width: 80%;
+            font-family: monospace;
+            white-space: pre-wrap;
+            border: 1px solid #444;
+        }
+    </style>
+</head>
+<body>
+<header>
+    CALL OF DUTY: Weapon Factory
+</header>
+
+<section class="carousel">
+    <div class="weapon-card">
+        <img src="https://m.media-amazon.com/images/I/81hk-J5dpfL._UF1000,1000_QL80_.jpg" alt="Pistol">
+        <h3>Pistol</h3>
+        <button onclick="fire('Pistol')">Fire</button>
+    </div>
+    <div class="weapon-card">
+        <img src="https://m.media-amazon.com/images/I/718iGeLK+nL._UF1000,1000_QL80_.jpg" alt="Rifle">
+        <h3>Rifle</h3>
+        <button onclick="fire('Rifle')">Fire</button>
+    </div>
+    <div class="weapon-card">
+        <img src="https://gundigest.com/wp-content/uploads/Bullpup-Shotgun-Lead.jpg" alt="Shotgun">
+        <h3>Shotgun</h3>
+        <button onclick="fire('Shotgun')">Fire</button>
+    </div>
+    <div class="weapon-card">
+        <img src="https://i.ytimg.com/vi/0EGKg9WjsoQ/maxresdefault.jpg" alt="AK47">
+        <h3>AK-47</h3>
+        <button onclick="fire('AK47')">Fire</button>
+    </div>
+    <div class="weapon-card">
+        <img src="https://wilsoncombat.com/media/wysiwyg/wilsoncombat/catalog/longguns/models/ss/ss-308-win_hero_catalog_01_01.jpg" alt="Sniper Rifle">
+        <h3>Sniper Rifle</h3>
+        <button onclick="fire('SniperRifle')">Fire</button>
+    </div>
+</section>
+
+<div id="log">[ Weapon Factory Ready ] Choose a weapon and fire.</div>
+
+<script>
+    class Gun {
+        fire() {}
+    }
+
+    class Pistol extends Gun {
+        fire() {
+            return "💀🔫";
+        }
+    }
+
+    class Rifle extends Gun {
+        fire() {
+            return "▄︻デ╦═一━";
+        }
+    }
+
+    class Shotgun extends Gun {
+        fire() {
+            return "⌐╦╦═─";
+        }
+    }
+
+    class AK47 extends Gun {
+        fire() {
+            return "▄︻╦芫≡══--";
+        }
+    }
+
+    class SniperRifle extends Gun {
+        fire() {
+            return "︻╦̵̵̿╤━─";
+        }
+    }
+
+    class GunFactory {
+        makeGun(variety) {
+            switch (variety) {
+                case "Pistol": return new Pistol();
+                case "Rifle": return new Rifle();
+                case "Shotgun": return new Shotgun();
+                case "AK47": return new AK47();
+                case "SniperRifle": return new SniperRifle();
+                default: throw new Error("Unknown gun type: " + variety);
+            }
+        }
+    }
+
+    function fire(type) {
+        const factory = new GunFactory();
+        const gun = factory.makeGun(type);
+        document.getElementById("log").textContent = `\nFiring ${type}:\n` + gun.fire();
+    }
+</script>
+</body>
+</html>

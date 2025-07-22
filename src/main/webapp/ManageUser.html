@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Proxy Design Pattern - User Management Demo</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #1f4037, #016161);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      width: 500px;
+      padding: 2rem;
+      color: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    input, button, textarea {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+
+    input, textarea {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    button {
+      background-color: #00c37e;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #00a16a;
+    }
+
+    .operations {
+      display: none;
+      margin-top: 2rem;
+    }
+
+    .btn-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    #console {
+      background-color: #000;
+      color: #00ff00;
+      padding: 1rem;
+      margin-top: 1rem;
+      height: 200px;
+      overflow-y: auto;
+      font-family: monospace;
+      font-size: 0.9rem;
+      border-radius: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>🔐 Proxy DB Authentication</h2>
+
+  <label for="username"></label><input type="text" id="username" placeholder="Username: e.g. Tharindu" />
+  <p>Use Username as <b>"Tharindu"</b> to access all functions</p>
+  <label for="password"></label><input type="password" id="password" placeholder="Password: e.g. deltaCodex8754" />
+  <p>Use the password as <b>"deltaCodex8754"</b> to access all functions</p>
+  <button onclick="login()">Login</button>
+
+  <div class="operations" id="operations">
+    <div class="btn-row">
+      <button onclick="insert()">Insert</button>
+      <button onclick="update()">Update</button>
+      <button onclick="del()">Delete</button>
+    </div>
+    <textarea id="query" rows="2" placeholder="Write SELECT query..."></textarea>
+    <button onclick="select()">Execute Select</button>
+  </div>
+
+  <div id="console">[Console Output]</div>
+</div>
+
+<script>
+  class RealDatabase {
+    insert() {
+      log('[RealDatabase] Inserting data into the database.');
+    }
+    update() {
+      log('[RealDatabase] Updating data in the database.');
+    }
+    delete() {
+      log('[RealDatabase] Deleting data from the database.');
+    }
+    select(query) {
+      log('[RealDatabase] Selecting data with query: ' + query);
+    }
+  }
+
+  class ProxyDatabase {
+    constructor(username, password) {
+      this.username = username;
+      this.password = password;
+      this.realDB = new RealDatabase();
+    }
+
+    authenticate() {
+      if (this.username === 'Tharindu' && this.password === 'deltaCodex8754') {
+        return true;
+      } else {
+        log('[ProxyDatabase] ❌ Authentication failed. Access denied.');
+        return false;
+      }
+    }
+
+    insert() {
+      if (this.authenticate()) {
+        log('[ProxyDatabase] ✅ Authenticated. Delegating insert().');
+        this.realDB.insert();
+      }
+    }
+
+    update() {
+      if (this.authenticate()) {
+        log('[ProxyDatabase] ✅ Authenticated. Delegating update().');
+        this.realDB.update();
+      }
+    }
+
+    delete() {
+      if (this.authenticate()) {
+        log('[ProxyDatabase] ✅ Authenticated. Delegating delete().');
+        this.realDB.delete();
+      }
+    }
+
+    select(query) {
+      if (this.authenticate()) {
+        log('[ProxyDatabase] ✅ Authenticated. Delegating select().');
+        this.realDB.select(query);
+      }
+    }
+  }
+
+  let proxy = null;
+
+  function login() {
+    const user = document.getElementById('username').value;
+    const pass = document.getElementById('password').value;
+
+    proxy = new ProxyDatabase(user, pass);
+
+    if (proxy.authenticate()) {
+      log('[System] ✅ Login successful.');
+      document.getElementById('operations').style.display = 'block';
+    } else {
+      log('[System] ❌ Login failed.');
+      document.getElementById('operations').style.display = 'none';
+    }
+  }
+
+  function insert() {
+    proxy?.insert();
+  }
+
+  function update() {
+    proxy?.update();
+  }
+
+  function del() {
+    proxy?.delete();
+  }
+
+  function select() {
+    const query = document.getElementById('query').value;
+    proxy?.select(query);
+  }
+
+  function log(message) {
+    const consoleBox = document.getElementById('console');
+    consoleBox.textContent += '\\n' + message;
+    consoleBox.scrollTop = consoleBox.scrollHeight;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Movie Night - Facade Pattern</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #141414;
+            color: white;
+        }
+        header {
+            background-color: #e50914;
+            padding: 1rem 2rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .container {
+            padding: 2rem;
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+        }
+        img.poster {
+            width: 300px;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+        button {
+            background-color: #e50914;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+        #log {
+            background-color: #222;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 10px;
+            text-align: left;
+            font-family: monospace;
+            min-height: 150px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<header>
+    NETFLIX THEATER SYSTEM
+</header>
+
+<div class="container">
+    <h2>🎬 Movie Night: Avengers Endgame</h2>
+    <img class="poster" src="https://upload.wikimedia.org/wikipedia/en/0/0d/Avengers_Endgame_poster.jpg" alt="Avengers Endgame Poster">
+
+    <div>
+        <button onclick="startMovie()">▶️ Watch Movie</button>
+        <button onclick="shutdownTheater()">⏹️ End Movie</button>
+    </div>
+
+    <div id="log">[System Ready] Press "Watch Movie" to begin.</div>
+</div>
+
+<script>
+    class TV {
+        on() {
+            return "TV turned on";
+        }
+        setInput() {
+            return "TV input set to HDMI";
+        }
+    }
+
+    class DVDPlayer {
+        on() {
+            return "DVD Player on";
+        }
+        play(movie) {
+            return `Playing movie: ${movie}`;
+        }
+    }
+
+    class SoundSystem {
+        on() {
+            return "Sound system on";
+        }
+        setVolume() {
+            return "Volume set to 100";
+        }
+    }
+
+    class Lights {
+        dim() {
+            return "Lights dimmed";
+        }
+    }
+
+    class HomeTheaterFacade {
+        constructor(tv, dvd, sound, lights) {
+            this.tv = tv;
+            this.dvd = dvd;
+            this.sound = sound;
+            this.lights = lights;
+        }
+
+        watchMovie(movie) {
+            return [
+                "\nGet ready to watch a movie...",
+                this.lights.dim(),
+                this.tv.on(),
+                this.tv.setInput(),
+                this.sound.on(),
+                this.sound.setVolume(),
+                this.dvd.on(),
+                this.dvd.play(movie)
+            ];
+        }
+
+        endMovie() {
+            return [
+                "\nShutting down the theater...",
+                "Turning off devices... (Not implemented)"
+            ];
+        }
+    }
+
+    const tv = new TV();
+    const dvd = new DVDPlayer();
+    const sound = new SoundSystem();
+    const lights = new Lights();
+    const homeTheater = new HomeTheaterFacade(tv, dvd, sound, lights);
+
+    function startMovie() {
+        const result = homeTheater.watchMovie("Avengers: Endgame");
+        updateLog(result);
+    }
+
+    function shutdownTheater() {
+        const result = homeTheater.endMovie();
+        updateLog(result);
+    }
+
+    function updateLog(lines) {
+        document.getElementById("log").textContent = lines.join("\n");
+    }
+</script>
+</body>
+</html>

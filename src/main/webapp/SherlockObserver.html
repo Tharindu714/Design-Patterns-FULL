@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sherlock Observer - Crime Scene Tracker</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Spectral+SC:wght@600&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Spectral SC', serif;
+            background: url('https://res.cloudinary.com/jerrick/image/upload/d_642250b563292b35f27461a7.png,f_jpg,fl_progressive,q_auto,w_1024/6698d0e97333af001ee35231.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f8f8f8;
+        }
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+            border-bottom: 3px solid crimson;
+            color: crimson;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px black;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 900px;
+            border-radius: 12px;
+            box-shadow: 0 0 30px black;
+        }
+        button {
+            background: crimson;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #800000;
+        }
+        #log {
+            background: #111;
+            padding: 1rem;
+            border: 2px dashed crimson;
+            border-radius: 10px;
+            white-space: pre-wrap;
+            margin-top: 1.5rem;
+            font-family: monospace;
+            color: #f0f0f0;
+            box-shadow: inset 0 0 10px crimson;
+        }
+        img.detective {
+            width: 120px;
+            border-radius: 50%;
+            border: 2px solid crimson;
+            margin: 1rem auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<header>
+    🕵️ Sherlock Observer - Crime Scene Tracker
+</header>
+
+<div class="container">
+    <img class="detective" src="https://m.media-amazon.com/images/M/MV5BNjg3NjY5NGUtZTlkNS00NGE2LWJhMTAtZTlkZDgzZDBhOWY1XkEyXkFqcGc@._V1_.jpg" alt="Sherlock Holmes">
+    <h2>Clue Discovery Panel</h2>
+    <button onclick="addClue('MURDER AT MIDNIGHT')">Add Clue #1</button>
+    <button onclick="addClue('LOOK UNDER THE FLOORBOARD')">Add Clue #2</button>
+    <button onclick="addClue('THE BUTLER DID IT')">Add Clue #3</button>
+
+    <div id="log">
+        [CrimeScene] Awaiting clues...
+    </div>
+</div>
+
+<script>
+    class Observer {
+        update(clue) {}
+    }
+
+    class ForensicAnalyst extends Observer {
+        update(clue) {
+            return `🧪 ForensicAnalyst: Dusting the keys for prints on clue → ${clue}`;
+        }
+    }
+
+    class PsychicMedium extends Observer {
+        update(clue) {
+            return `🔮 PsychicMedium: I hear whispers chanting '${clue}'!`;
+        }
+    }
+
+    class TechGeek extends Observer {
+        update(clue) {
+            return `💻 TechGeek: Arduino logged keystroke sequence: [${clue}]`;
+        }
+    }
+
+    class CrimeScene {
+        constructor() {
+            this.observers = [new ForensicAnalyst(), new PsychicMedium(), new TechGeek()];
+            this.log = document.getElementById("log");
+        }
+
+        addClue(clue) {
+            let output = `\n[CrimeScene] New clue discovered: \"${clue}\"`;
+            for (let observer of this.observers) {
+                output += `\n` + observer.update(clue);
+            }
+            this.log.textContent += output;
+        }
+    }
+
+    const scene = new CrimeScene();
+
+    function addClue(text) {
+        scene.addClue(text);
+    }
+</script>
+</body>
+</html>

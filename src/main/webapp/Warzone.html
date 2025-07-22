@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>☣️ WarZone State Pattern Demo</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: "Orbitron", sans-serif;
+            background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/01b3ab40-08d5-4899-baaa-9f05eac92ad9/ddjjmgx-aff54ae7-ca3e-4061-9620-0def6e682d05.jpg/v1/fill/w_1920,h_1080,q_75,strp/modern_warzone_wallpaper_4k_by_xioxgraphix_ddjjmgx-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzAxYjNhYjQwLTA4ZDUtNDg5OS1iYWFhLTlmMDVlYWM5MmFkOVwvZGRqam1neC1hZmY1NGFlNy1jYTNlLTQwNjEtOTYyMC0wZGVmNmU2ODJkMDUuanBnIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.oixOpqyMHgA8wEnS_mGfjZRinSy6PFDqdYUp22GtwtE') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 800px;
+            margin: 5% auto;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            color: #00ff88;
+        }
+
+        .state-image {
+            text-align: center;
+            margin: 1rem 0;
+        }
+
+        .state-image img {
+            max-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            border: 3px solid #00ff88;
+        }
+
+        .controls {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .controls button {
+            margin: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            background: #00c37e;
+            color: #000;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .controls button:hover {
+            background: #00a16a;
+        }
+
+        #log {
+            background: #000;
+            padding: 1rem;
+            height: 200px;
+            overflow-y: auto;
+            margin-top: 1rem;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            border: 1px solid #00ff88;
+            white-space: pre-line;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>☣️ WarZone Guard AI</h1>
+
+    <div class="state-image">
+        <img id="guardImage" src="https://cdn-icons-png.flaticon.com/512/3097/3097090.png" alt="Guard State"/>
+    </div>
+
+    <div class="controls">
+        <button onclick="update()">🔄 Update</button>
+        <button onclick="handleInput('seeEnemy')">👁️ See Enemy</button>
+        <button onclick="handleInput('enemyInRange')">🎯 Enemy In Range</button>
+        <button onclick="handleInput('loseEnemy')">👻 Lose Enemy</button>
+    </div>
+
+    <div id="log">[LOG] Guard initialized and ready to patrol.</div>
+</div>
+
+<script>
+    class State {
+        handleInput(guard, input) {
+        }
+
+        update(guard) {
+        }
+    }
+
+    class PatrolState extends State {
+        handleInput(guard, input) {
+            if (input === "seeEnemy") {
+                log("[PatrolState] Intruder spotted! Switching to ALERT state.");
+                guard.setState(new AlertState());
+                updateImage("alert");
+            }
+        }
+
+        update(guard) {
+            log("[PatrolState] Guard is patrolling the area.");
+            updateImage("patrol");
+        }
+    }
+
+    class AlertState extends State {
+        handleInput(guard, input) {
+            if (input === "enemyInRange") {
+                log("[AlertState] Target in range! Switching to ATTACK state.");
+                guard.setState(new AttackState());
+                updateImage("attack");
+            } else if (input === "loseEnemy") {
+                log("[AlertState] Lost sight of intruder. Returning to PATROL state.");
+                guard.setState(new PatrolState());
+                updateImage("patrol");
+            }
+        }
+
+        update(guard) {
+            log("[AlertState] Guard is taking cover and surveying the area.");
+            updateImage("alert");
+        }
+    }
+
+    class AttackState extends State {
+        handleInput(guard, input) {
+            if (input === "loseEnemy") {
+                log("[AttackState] Target escaped! Switching to PATROL state.");
+                guard.setState(new PatrolState());
+                updateImage("patrol");
+            }
+        }
+
+        update(guard) {
+            log("[AttackState] Guard is engaging the enemy aggressively.");
+            updateImage("attack");
+        }
+    }
+
+    class Guard {
+        constructor() {
+            this.currentState = new PatrolState();
+            updateImage("patrol");
+        }
+
+        setState(state) {
+            this.currentState = state;
+        }
+
+        handleInput(input) {
+            this.currentState.handleInput(this, input);
+        }
+
+        update() {
+            this.currentState.update(this);
+        }
+    }
+
+    const sentinel = new Guard();
+
+    function handleInput(input) {
+        sentinel.handleInput(input);
+    }
+
+    function update() {
+        sentinel.update();
+    }
+
+    function log(msg) {
+        const logBox = document.getElementById("log");
+        logBox.textContent += "\n" + msg;
+        logBox.scrollTop = logBox.scrollHeight;
+    }
+
+    function updateImage(state) {
+        const image = document.getElementById("guardImage");
+        switch (state) {
+            case "patrol":
+                image.src = "https://i.ytimg.com/vi/-OQurdZqC8U/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLC2hZQ8mrcQoLnyPg2k5OQuopbUqg";
+                break;
+            case "alert":
+                image.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuRQDMp06fkwuIZbeeXDxDxjSfhk1VTxqbm_-znoNMvN-xV1lvj0x93ycJbu-zvfgrhb8&usqp=CAU";
+                break;
+            case "attack":
+                image.src = "https://d1ldvf68ux039x.cloudfront.net/thumbs/photos/2309/8020334/1000w_q95.jpg";
+                break;
+            default:
+                image.src = "https://upload.wikimedia.org/wikipedia/commons/a/ae/Army_Corps_at_the_Victory_parade.jpg";
+        }
+    }
+</script>
+</body>
+</html>

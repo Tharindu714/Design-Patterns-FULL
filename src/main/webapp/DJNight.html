@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber DJ Playlist - Iterator Pattern</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap');
+
+        body {
+            margin: 0;
+            font-family: 'Orbitron', sans-serif;
+            background: linear-gradient(to right, #000000, #1f1c2c);
+            color: #00ffe5;
+        }
+        header {
+            background-color: #111;
+            padding: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+            border-bottom: 2px solid #00ffe5;
+            box-shadow: 0 0 20px #00ffe5;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            text-align: center;
+            padding: 2rem;
+        }
+        button {
+            background: #00ffe5;
+            color: #000;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #00bfa6;
+        }
+        #log {
+            background: #111;
+            padding: 1rem;
+            margin-top: 2rem;
+            border: 2px dashed #00ffe5;
+            border-radius: 10px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            min-height: 200px;
+            box-shadow: inset 0 0 10px #00ffe5;
+        }
+        .deck {
+            background: url('https://thumbs.dreamstime.com/b/surreal-d-music-background-featuring-levitating-neon-dj-controller-surrounded-swirling-waves-glowing-sound-energy-high-364161174.jpg');
+            background-size: cover;
+            height: 250px;
+            margin-top: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 0 20px #00ffe5;
+        }
+    </style>
+</head>
+<body>
+<header>
+    🌟 Cyber DJ: Neon Night Playlist 🌟
+</header>
+
+<div class="container">
+    <h2>🎵 Now Playing...</h2>
+    <div id="log">Press "Start Playlist" to begin.
+    </div>
+
+    <button onclick="playNext()">▶️ Start Playlist</button>
+
+    <div class="deck"></div>
+</div>
+
+<script>
+    class Song {
+        constructor(title, artist) {
+            this.title = title;
+            this.artist = artist;
+        }
+
+        toString() {
+            return `"${this.title}" by ${this.artist}`;
+        }
+    }
+
+    class SongCollection {
+        constructor() {
+            this.songs = [];
+        }
+
+        addSong(song) {
+            this.songs.push(song);
+        }
+
+        getIterator() {
+            return new SongIterator(this.songs);
+        }
+    }
+
+    class SongIterator {
+        constructor(songs) {
+            this.songs = songs;
+            this.index = 0;
+        }
+
+        hasNext() {
+            return this.index < this.songs.length;
+        }
+
+        next() {
+            return this.songs[this.index++];
+        }
+    }
+
+    const playlist = new SongCollection();
+    playlist.addSong(new Song("Levels", "Avicii"));
+    playlist.addSong(new Song("Strobe", "deadmau5"));
+    playlist.addSong(new Song("One More Time", "Daft Punk"));
+
+    const iterator = playlist.getIterator();
+    const log = document.getElementById("log");
+
+    function playNext() {
+        if (iterator.hasNext()) {
+            const song = iterator.next();
+            log.textContent += `\nNow playing: ${song.toString()}`;
+        } else {
+            log.textContent += "\n=== Playlist Complete ===";
+        }
+    }
+</script>
+</body>
+</html>

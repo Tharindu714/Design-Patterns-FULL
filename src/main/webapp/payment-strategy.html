@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>💳 Payment Strategy Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 4rem auto;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(6px);
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffcc00;
+        }
+
+        label, select, input {
+            display: block;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        select, input {
+            padding: 0.7rem;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        button {
+            margin-top: 1.5rem;
+            background: #ffcc00;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #000;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background: #f1b800;
+        }
+
+        #output {
+            margin-top: 2rem;
+            background: #000;
+            color: #0f0;
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: monospace;
+            white-space: pre-line;
+            border-left: 5px solid #ffcc00;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>🛒 Online Store Checkout</h1>
+
+    <label for="amount">Enter Amount (Rs.):</label>
+    <input type="number" id="amount" placeholder="e.g., 1500">
+
+    <label for="method">Choose Payment Method:</label>
+    <select id="method">
+        <option value="">-- Select Method --</option>
+        <option value="credit">💳 Credit Card</option>
+        <option value="paypal">🧾 PayPal</option>
+        <option value="crypto">💲 Cryptocurrency</option>
+    </select>
+
+    <button onclick="payNow()">Pay Now</button>
+
+    <div id="output">🧾 Payment summary will appear here...</div>
+</div>
+
+<script>
+    function payNow() {
+        const amount = document.getElementById("amount").value;
+        const method = document.getElementById("method").value;
+        const output = document.getElementById("output");
+
+        if (!amount || !method) {
+            output.textContent = "❌ Please enter amount and select a payment method.";
+            return;
+        }
+
+        let message;
+
+        switch (method) {
+            case "credit":
+                message = `✅ Paid Rs. ${amount} using Credit Card.`;
+                break;
+            case "paypal":
+                message = `✅ Paid Rs. ${amount} using PayPal.`;
+                break;
+            case "crypto":
+                message = `✅ Paid Rs. ${amount} using Cryptocurrency.`;
+                break;
+            default:
+                message = "❌ Invalid payment method selected.";
+        }
+
+        output.textContent = message;
+    }
+</script>
+</body>
+</html>

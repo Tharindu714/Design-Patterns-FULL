@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>⚔️ Hero Battle Rituals - Template Method Pattern</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: url('https://cdn.wallpapersafari.com/28/90/0Qr1xk.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.7);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: #f5c518;
+            text-shadow: 2px 2px #000;
+        }
+
+        .heroes {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .card {
+            background: #222;
+            border: 2px solid #f5c518;
+            border-radius: 12px;
+            padding: 1rem;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 0 20px #000;
+        }
+
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        .card h2 {
+            color: #f5c518;
+            margin-top: 1rem;
+        }
+
+        .card button {
+            background: #f5c518;
+            color: #000;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        .card button:hover {
+            background: #e4b615;
+        }
+
+        #log {
+            margin-top: 3rem;
+            background: #111;
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: monospace;
+            white-space: pre-line;
+            border-left: 5px solid #f5c518;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+<div class="overlay">
+    <h1>⚔️ Hero Battle Rituals</h1>
+
+    <div class="heroes">
+        <div class="card">
+            <img src="https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://media.easy-peasy.ai/2ca07ef1-3c37-4858-9278-aba15d8550a7/d772b7d4-8173-4f91-b44d-6843a6ba8878.png" alt="Warrior">
+            <h2>Warrior</h2>
+            <button onclick="startRitual('warrior')">Start Ritual</button>
+        </div>
+        <div class="card">
+            <img src="https://imgcdn.stablediffusionweb.com/2024/12/23/e763a0bd-15cc-4a04-aefe-0807fa2b85b2.jpg" alt="Mage">
+            <h2>Mage</h2>
+            <button onclick="startRitual('mage')">Start Ritual</button>
+        </div>
+        <div class="card">
+            <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d539788a-29a0-487c-b560-c286dcb3498b/d8r9api-264b8d71-0474-4190-b844-869d0acde7b4.jpg/v1/fill/w_600,h_849,q_75,strp/elven_archer_by_happysadcorner_d8r9api-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9ODQ5IiwicGF0aCI6IlwvZlwvZDUzOTc4OGEtMjlhMC00ODdjLWI1NjAtYzI4NmRjYjM0OThiXC9kOHI5YXBpLTI2NGI4ZDcxLTA0NzQtNDE5MC1iODQ0LTg2OWQwYWNkZTdiNC5qcGciLCJ3aWR0aCI6Ijw9NjAwIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.0GfGbuIUgTJwEZ4rIR7WiK_xmnBFdgj0YopHaWK2eiw" alt="Archer">
+            <h2>Archer</h2>
+            <button onclick="startRitual('archer')">Start Ritual</button>
+        </div>
+    </div>
+
+    <div id="log">📝 Ritual Log will appear here...</div>
+</div>
+
+<script>
+    function startRitual(hero) {
+        const log = document.getElementById("log");
+        log.textContent = "📝 Initiating battle ritual...\n";
+
+        switch (hero) {
+            case "warrior":
+                log.textContent += "[Warrior] Donning heavy armor and readying sword.\n";
+                log.textContent += "[Warrior] Charges forward with a battle cry!\n";
+                log.textContent += "[Warrior] Raises shield to block incoming blows.\n";
+                log.textContent += "[Warrior] Roars victoriously and pounds chest.\n";
+                break;
+            case "mage":
+                log.textContent += "[Mage] Chanting incantations and gathering mana.\n";
+                log.textContent += "[Mage] Hurls a blazing fireball at the enemy!\n";
+                log.textContent += "[Mage] Conjures a shimmering magical barrier.\n";
+                break;
+            case "archer":
+                log.textContent += "[Archer] Docking arrow and adjusting quiver.\n";
+                log.textContent += "[Archer] Fires a volley of arrows with deadly precision.\n";
+                log.textContent += "[Archer] Dodges and keeps distance from foes.\n";
+                log.textContent += "[Archer] Salutes enemy before vanishing into the trees.\n";
+                break;
+            default:
+                log.textContent += "Unknown hero selected!";
+        }
+    }
+</script>
+</body>
+</html>
