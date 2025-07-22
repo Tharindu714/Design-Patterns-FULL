@@ -22,6 +22,23 @@
             max-width: 600px;
             margin: auto;
         }
+        header {
+            padding: 1rem 2rem;
+            /* new: center contents */
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 64px;
+            height: auto;
+        }
         button {
             padding: 0.6rem 1rem;
             font-size: 1rem;
@@ -41,10 +58,96 @@
             min-height: 120px;
             white-space: pre-wrap;
         }
+        .description {
+            padding: 1.5rem;
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .description h2 {
+            margin-top: 0;
+        }
+
+        .description ul {
+            padding-left: 1.2rem;
+        }
+
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
-<h1>🌏 Adapter Pattern - Plug Converter Demo</h1>
+<header>
+    <div class="header-inner">
+        <img class="logo" src="https://cdn-icons-png.flaticon.com/512/5013/5013704.png" alt="Charging Adapter Logo">
+        <h1>Adapter Design Pattern: Plug Converter Demo</h1>
+    </div>
+</header>
+<div class="description">
+    <h2>📘 Scenario:</h2>
+    <p>
+        You're traveling through Europe, and you bring along your trusty US laptop and phone chargers. But when you arrive and go to plug them in,
+        you hit a problem — Europe uses Type C plugs with two round pins, while your chargers have the typical US Type A plug with two flat pins. There's no way to connect them directly. Luckily, you have a plug adapter with you. This small but essential device acts as a translator, converting your charger's plug shape so it fits perfectly into the European socket. Just like magic, your charger works seamlessly —
+        all thanks to this simple interface adapter that bridges two incompatible systems.
+    </p>
+    <ul>
+        <li>💡 Europe uses Type C plugs (two round pins).</li>
+        <li>🔌Your charger has a Type A plug (two flat pins).</li>
+    </ul>
+    <p>The adapter converts the interface (plug type) so the device (your charger) can work with the existing system (European socket)..</p>
+
+    <p><strong>Problem:</strong></p>
+    <p>
+        Your US charger has a Type A plug (with flat pins), but European sockets accept only Type C plugs (with round pins).
+        Without a direct match, you can’t connect your charger to the power supply — they are incompatible systems.
+    </p>
+
+    <p><strong>🔌 Adapter Pattern Solution:</strong></p>
+    <p>
+        Just like using a plug adapter, the Adapter Pattern bridges the gap between incompatible interfaces.
+        It wraps your US charger (the client) in a compatible interface (Type C plug) so it can seamlessly connect with the European socket (the system).
+        The underlying device remains unchanged — only the interface is adapted.
+    </p>
+
+    <div class="uml-image">
+        <p><strong>UML Diagram:</strong></p>
+        <img src="images/Adapter.png" alt="UML Diagram of Adapter Pattern"/>
+    </div>
+
+    <p><strong>Output:</strong></p>
+    <pre style="background:#1e1e1e; color:#d4d4d4; padding:1rem; border-radius:8px; overflow-x:auto;">
+Phone starts charging...
+Adapting plug...
+Power supplied using US standard plug.
+</pre>
+
+    <div style="margin-top:1rem;">
+        <a href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/e76b523066a830caef43706d2a8a5acc4abf53ed/src/main/java/com/tharindu/oodp1/Adapter/MainAdapter.java"
+           target="_blank" style="
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #24292e;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;">
+            🔗 View Code on GitHub
+        </a>
+    </div>
+</div>
+
 <div class="container">
     <p>You brought a US charger to Europe... ⚡ Let's plug it in using an adapter!</p>
     <button onclick="chargePhone()">Charge Phone</button>

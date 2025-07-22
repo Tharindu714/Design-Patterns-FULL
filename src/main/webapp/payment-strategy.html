@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>💳 Payment Strategy Demo</title>
+    <title>Online Payment Gateway - Strategy Design Pattern</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
@@ -20,6 +20,25 @@
             border-radius: 12px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(6px);
+        }
+
+        header {
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            padding: 1rem 2rem;
+            /* new: center contents */
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 64px;
+            height: auto;
         }
 
         h1 {
@@ -67,9 +86,101 @@
             white-space: pre-line;
             border-left: 5px solid #ffcc00;
         }
+
+        .description {
+            background-color: #0f0f0f;
+            padding: 1.5rem;
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .description h2 {
+            margin-top: 0;
+        }
+
+        .description ul {
+            padding-left: 1.2rem;
+        }
+
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
+<header>
+    <div class="header-inner">
+        <img class="logo" src="https://png.pngtree.com/png-vector/20241217/ourmid/pngtree-clipart-of-a-money-bag-filled-with-gold-coins-featuring-dollar-png-image_14789520.png" alt="Money Logo">
+        <h1>Strategy Design Pattern: Online Payment Gateway</h1>
+    </div>
+</header>
+<div class="description">
+    <h2>📘 Scenario:</h2>
+    <p>
+        Imagine you are developing an e-commerce app. When a user checks out, they can choose from different payment
+        methods:
+    </p>
+    <ul>
+        <li>💳 Credit Card</li>
+        <li>💸 PayPal</li>
+        <li>💰 Cryptocurrency</li>
+    </ul>
+    <p>Each method has a different algorithm/logic for processing payments.</p>
+
+    <p><strong>Problem:</strong></p>
+    <p>
+        If you try to handle all payment methods in a single <code>PaymentProcessor</code> class using
+        <code>if-else</code> or <code>switch</code>, your code will:
+    </p>
+    <ul>
+        <li>Become harder to manage</li>
+        <li>Violate the Open/Closed Principle (OCP)</li>
+    </ul>
+
+    <p><strong>💡 Strategy Pattern Solution:</strong></p>
+    <p>
+        We define a common interface for all payment methods. Then, we plug in the appropriate payment strategy at
+        runtime.
+    </p>
+
+    <div class="uml-image">
+        <p><strong>UML Diagram:</strong></p>
+        <img src="images/Strategy.png" alt="UML Diagram of Strategy Pattern for Payment System"/>
+    </div>
+
+    <p><strong>Output:</strong></p>
+    <pre style="background:#1e1e1e; color:#d4d4d4; padding:1rem; border-radius:8px; overflow-x:auto;">
+Paid Rs. 1500.0 using Credit Card.
+Paid Rs. 5000.0 using PayPal.
+Paid Rs. 12000.0 using Cryptocurrency.
+</pre>
+
+    <div style="margin-top:1rem;">
+        <a href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/e76b523066a830caef43706d2a8a5acc4abf53ed/src/main/java/com/tharindu/oodp1/Strategy/OnlineStoreStrategy.java"
+           target="_blank" style="
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #24292e;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;">
+            🔗 View Code on GitHub
+        </a>
+    </div>
+</div>
+
 <div class="container">
     <h1>🛒 Online Store Checkout</h1>
 

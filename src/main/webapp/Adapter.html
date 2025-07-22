@@ -11,6 +11,23 @@
             padding: 2rem;
             color: #333;
         }
+        header {
+            padding: 1rem 2rem;
+            /* new: center contents */
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 64px;
+            height: auto;
+        }
         h1 {
             color: #2c3e50;
         }
@@ -43,12 +60,97 @@
             white-space: pre-wrap;
             min-height: 100px;
         }
+        .description {
+            padding: 1.5rem;
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .description h2 {
+            margin-top: 0;
+        }
+
+        .description ul {
+            padding-left: 1.2rem;
+        }
+
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
-<h1>💻 Adapter Pattern - SD Card Slot</h1>
-<p>Select a card to insert into the laptop. Watch how the Adapter converts Micro SD into SD!</p>
+<header>
+    <div class="header-inner">
+        <img class="logo" src="https://www.pngplay.com/wp-content/uploads/2/Secure-Digital-PNG-Photo-Image.png" alt="SD Logo">
+        <h1>Adapter Design Pattern: SD Card Slot</h1>
+    </div>
+</header>
+<div class="description">
+    <h2>📘 Scenario:</h2>
+    <p>
+        Imagine you have a laptop that accepts only standard SD cards. Now, you want to read data from a Samsung Micro SD card 🗃️,
+        but it’s not directly compatible with the laptop’s SD card slot. Luckily, you have an SD adapter. By inserting the Micro SD
+        into the adapter, it now fits and functions just like a standard SD card. The laptop reads the data seamlessly —
+        all because the adapter bridges the gap between the incompatible interfaces.
+    </p>
+    <ul>
+        <li>💽 Laptop accepts only standard SD Cards.</li>
+        <li>🗃️ You have a Micro SD Card that doesn’t directly fit.</li>
+    </ul>
+    <p>
+        The SD adapter converts the Micro SD interface to the SD format so the laptop can read the card as if it were a native SD device.
+    </p>
 
+    <p><strong>Problem:</strong></p>
+    <p>
+        The Micro SD card uses a different interface than the laptop SD slot. You can't insert or read it directly without an adapter,
+        making the two systems incompatible.
+    </p>
+
+    <p><strong>🔌 Adapter Pattern Solution:</strong></p>
+    <p>
+        We use an Adapter class to wrap the Micro SD card and present it through the expected SD card interface.
+        This allows the laptop to interact with it without needing to know the internal differences.
+    </p>
+
+    <div class="uml-image">
+        <p><strong>UML Diagram:</strong></p>
+        <img src="images/adapter_sd.png" alt="UML Diagram of Adapter Pattern for SD Card"/>
+    </div>
+
+    <p><strong>Output:</strong></p>
+    <pre style="background:#1e1e1e; color:#d4d4d4; padding:1rem; border-radius:8px; overflow-x:auto;">
+Card inserted into laptop slot.
+💽 Converting Micro SD Card to SD Card format...
+Reading data from Samsung Micro SD Card 🗃️
+    </pre>
+
+    <div style="margin-top:1rem;">
+        <a href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/e76b523066a830caef43706d2a8a5acc4abf53ed/src/main/java/com/tharindu/oodp1/Adapter/LaptopAdapter.java"
+           target="_blank" style="
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #24292e;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;">
+            🔗 View Code on GitHub
+        </a>
+    </div>
+</div>
 <div class="card-slot">
     <label for="cardType">Insert Card:</label>
     <select id="cardType">

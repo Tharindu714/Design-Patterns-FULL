@@ -1,59 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Singleton Pattern - Printer Spooler</title>
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: #f2f2f7;
+            background: #9dcaef;
             padding: 2rem;
-            color: #333;
+            color: #1e3a5f;
         }
+
+        header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        header img {
+            width: 48px;
+            margin-right: 0.75rem;
+        }
+
         h1 {
-            color: #444;
+            font-size: 2rem;
+            margin: 0;
         }
+
+        .description {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .description h2 {
+            margin-top: 0;
+        }
+
+        .description ul {
+            padding-left: 1.2rem;
+        }
+
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
         #printer {
-            background: white;
-            padding: 1rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            margin-top: 1rem;
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
+
         input {
-            padding: 0.5rem;
-            width: 300px;
+            padding: 0.6rem 0.8rem;
+            width: calc(100% - 140px);
             font-size: 1rem;
+            border: 2px solid #90caf9;
+            border-radius: 6px;
+            outline: none;
         }
+
+        input:focus {
+            border-color: #42a5f5;
+        }
+
         button {
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             font-size: 1rem;
             margin-left: 1rem;
-            background-color: #4CAF50;
+            background-color: #1976d2;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
         }
+
+        button:hover {
+            background-color: #1565c0;
+        }
+
         #log {
-            margin-top: 1rem;
-            background: #fff;
-            border: 1px solid #ccc;
+            margin-top: 1.5rem;
+            background: #f9fbe7;
+            border: 1px solid #dce775;
             padding: 1rem;
             border-radius: 8px;
-            max-height: 250px;
+            max-height: 300px;
             overflow-y: auto;
-            font-family: monospace;
+            font-family: 'Courier New', monospace;
+            color: #33691e;
+        }
+
+        #log div {
+            margin-bottom: 0.4rem;
         }
     </style>
 </head>
 <body>
-<h1>🖨️ Singleton Pattern - Printer Spooler</h1>
-<p>This demo simulates a single PrinterSpooler instance shared across print jobs.</p>
+<header>
+    <img src="https://www.freeiconspng.com/thumbs/printer-icon/printer-icon--dragon-soft-iconset--artuam-31.png"
+         alt="Printer Icon"/>
+    <h1>🔒 Singleton Design Pattern: Printer Spooler</h1>
+</header>
+<div class="description">
+    <h2>📘 Scenario:</h2>
+    <p>
+        In an office network, multiple computers are connected to a single shared printer.
+        If every computer sends print jobs directly to the printer at the same time, it could cause conflicts.
+        So, we need a central system to manage the print requests — this is called a <strong>Printer Spooler</strong>.
+    </p>
+
+    <p><strong>The Printer Spooler:</strong></p>
+    <ul>
+        <li>Queues the print jobs.</li>
+        <li>Send them to the printer one at a time.</li>
+        <li>There Should be only one instance throughout the system.</li>
+    </ul>
+
+    <p><strong>Real World Benefit:</strong></p>
+    <ul>
+        <li>Ensures only one spooler manages all print requests.</li>
+        <li>Prevents conflicts and duplicate access.</li>
+        <li>Centralized control improves efficiency and reliability.</li>
+    </ul>
+
+    <div class="uml-image">
+        <p><strong>UML Diagram:</strong></p>
+        <img src="images/singleton.png" alt="UML Diagram of Singleton Printer Spooler"/>
+    </div>
+
+    <p><strong>Output:</strong></p>
+    <pre style="background:#1e1e1e; color:#d4d4d4; padding:1rem; border-radius:8px; overflow-x:auto;">
+Printer Spooler Initialized
+Printing: Employee Report.pdf
+Printing: Annual Budget.xlsx
+true
+</pre>
+
+    <div style="margin-top:1rem;">
+        <a href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/e76b523066a830caef43706d2a8a5acc4abf53ed/src/main/java/com/tharindu/oodp1/Singleton/OfficeSingleton.java"
+           target="_blank" style="
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #24292e;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-family: 'Segoe UI', sans-serif;
+  ">
+            🔗 View Code on GitHub
+        </a>
+    </div>
+
+</div>
 
 <div id="printer">
-    <label for="docInput"></label><input type="text" id="docInput" placeholder="Enter document name..." />
+    <label for="docInput"></label><input type="text" id="docInput" placeholder="Enter document name..."/>
     <button onclick="sendToPrinter()">Print</button>
     <div id="log"></div>
 </div>
