@@ -6,7 +6,6 @@
     <style>
         body {
             margin: 0;
-            font-family: "Orbitron", sans-serif;
             background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/01b3ab40-08d5-4899-baaa-9f05eac92ad9/ddjjmgx-aff54ae7-ca3e-4061-9620-0def6e682d05.jpg/v1/fill/w_1920,h_1080,q_75,strp/modern_warzone_wallpaper_4k_by_xioxgraphix_ddjjmgx-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiJcL2ZcLzAxYjNhYjQwLTA4ZDUtNDg5OS1iYWFhLTlmMDVlYWM5MmFkOVwvZGRqam1neC1hZmY1NGFlNy1jYTNlLTQwNjEtOTYyMC0wZGVmNmU2ODJkMDUuanBnIiwid2lkdGgiOiI8PTE5MjAifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.oixOpqyMHgA8wEnS_mGfjZRinSy6PFDqdYUp22GtwtE') no-repeat center center fixed;
             background-size: cover;
             color: #fff;
@@ -14,6 +13,7 @@
 
         .container {
             background: rgba(0, 0, 0, 0.7);
+            font-family: "Orbitron", sans-serif;
             padding: 2rem;
             border-radius: 15px;
             max-width: 800px;
@@ -74,9 +74,100 @@
             border: 1px solid #00ff88;
             white-space: pre-line;
         }
+        .description {
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 1.5rem;
+            font-size: 1.2rem;
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .description h2 {
+            margin-top: 0;
+        }
+
+        .description ul {
+            padding-left: 1.2rem;
+        }
+
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
+<div class="description">
+    <h2>📊 State Design Pattern: Shadow Ops — Stealth Guard AI</h2>
+
+    <p><strong>📘 Scenario:</strong></p>
+    <p>
+        In the neon-lit city of <em>Neo Aegis</em>, stealth drones patrol government facilities. Each drone (the <strong>Context</strong>) operates in three distinct modes:
+    </p>
+    <ul>
+        <li><strong>Patrol</strong> – quietly navigates preset paths</li>
+        <li><strong>Alert</strong> – takes cover and scans after noticing unusual activity</li>
+        <li><strong>Attack</strong> – opens fire when an intruder is fully detected</li>
+    </ul>
+    <p>
+        As events occur—like <code>seeEnemy()</code>, <code>hearNoise()</code>, <code>enemyInRange()</code>, or <code>loseEnemy()</code>—the drone’s behavior shifts accordingly.
+    </p>
+
+    <p><strong>⚠️ Problem:</strong></p>
+    <ul>
+        <li>Managing state transitions with <code>if-else</code> or <code>switch</code> logic clutters the code.</li>
+        <li>All state-specific behavior lives inside one massive class.</li>
+        <li>Adding new states or transitions becomes error-prone.</li>
+    </ul>
+
+    <p><strong>💡 State Pattern Solution:</strong></p>
+    <p>
+        Each drone mode is encapsulated as a separate class implementing a common <code>State</code> interface.
+        The drone switches its internal <code>currentState</code> dynamically based on real-time input.
+        This keeps state-specific logic modular, extensible, and easy to maintain.
+    </p>
+
+    <div class="uml-image">
+        <img src="images/State.png" alt="State Design Pattern UML Diagram">
+    </div>
+
+    <p><strong>🖥️ Output:</strong></p>
+    <pre style="font-size: 1rem">
+[PatrolState] Guard is patrolling the area.
+[PatrolState] Intruder spotted! Switching to ALERT state.
+[AlertState] Guard is taking cover and surveying the area.
+
+[AlertState] Target in range! Switching to ATTACK state.
+[AttackState] Guard is engaging the enemy aggressively.
+
+[AttackState] Target escaped! Switching to PATROL state.
+[PatrolState] Guard is patrolling the area.
+  </pre>
+
+    <div style="margin-top:1rem;">
+        <a href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/4ff2bfe2f5eab3fdb8fdf7d9654854c12c07e2c4/src/main/java/com/tharindu/oodp1/State/StatePatternDemo.java"
+           target="_blank" style="
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #00c37e;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;">
+            🔗 View Code on GitHub
+        </a>
+    </div>
+</div>
 
 <div class="container">
     <h1>☣️ WarZone Guard AI</h1>

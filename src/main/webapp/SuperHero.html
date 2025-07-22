@@ -9,7 +9,7 @@
             background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
             color: #fff;
             font-family: 'Segoe UI', sans-serif;
-            text-align: center;
+
             padding: 2rem;
         }
 
@@ -17,6 +17,13 @@
             font-size: 2.5rem;
             margin-bottom: 1rem;
             color: #ffcc00;
+        }
+        .button-panel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap; /* allows buttons to wrap nicely on smaller screens */
+            margin-top: 2rem;
         }
 
         .button-panel button {
@@ -26,6 +33,7 @@
             border: none;
             border-radius: 8px;
             background-color: #e74c3c;
+            justify-content: center;
             color: white;
             cursor: pointer;
             transition: 0.3s;
@@ -38,6 +46,7 @@
         .heroes {
             display: flex;
             justify-content: center;
+            text-align: center;
             gap: 2rem;
             margin-bottom: 2rem;
         }
@@ -63,11 +72,99 @@
             white-space: pre-wrap;
             text-align: left;
         }
+        header {
+            background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+            padding: 1.5rem;
+            font-size: 2rem;
+            text-align: center;
+            border-bottom: 3px solid #c0392b;
+            color: #ffcc00;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px black;
+        }
+        .uml-image {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .uml-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
-<h1>🌌 DC Heroes Command Center</h1>
+<header>
+    🌌 Commando Design pattern - Crisis at Metropolis
+</header>
+<div class="description">
+    <p><strong>📘 Scenario:</strong></p>
+    <p>
+        The Justice League Command Center is equipped with a high-tech <strong>Control Panel</strong> (Invoker). Each button on this panel is wired to a <em>Command</em> object
+        that knows <strong>what action to take</strong> and <strong>which superhero (Receiver)</strong> to call upon.
+        When danger strikes, the panel simply triggers the right command—heroes leap into action without the panel knowing how it all works.
+    </p>
+    <ul>
+        <li>🦸‍♂️ <strong>Superman</strong> – flies in to handle large-scale threats</li>
+        <li>🦇 <strong>Batman</strong> – uses tech and tactics to handle chaos</li>
+        <li>⚡ <strong>Flash</strong> – speeds in for rescue and recovery missions</li>
+    </ul>
 
+    <p><strong>⚠️ Problem:</strong></p>
+    <ul>
+        <li>The Control Panel must handle dozens of mission types and heroes, leading to tightly coupled code.</li>
+        <li>Adding new buttons or actions requires altering core control logic.</li>
+        <li>No uniform way to trigger complex sequences like undo, queue, or log.</li>
+    </ul>
+
+    <p><strong>💡 Command Pattern Solution:</strong></p>
+    <p>
+        Each action is wrapped in a <code>Command</code> object that decouples the invoker (panel) from the receiver (hero).
+        The Control Panel doesn't need to know how Superman flies or how Batman throws his batarang.
+        All it does is call <code>execute()</code> on the command—and the magic happens behind the scenes.
+    </p>
+
+    <div class="uml-image">
+        <img src="images/Command.png" alt="Command Design Pattern UML Diagram">
+    </div>
+
+    <p><strong>🖥️ Output:</strong></p>
+    <pre style="font-size: 0.8rem;"><code>
+=== Crisis: Alien Drone Attack ===
+
+[ControlPanel] Activating command...
+[Superman] Flying at hypersonic speed to Metropolis!
+[Superman] Rescuing civilians from collapsing buildings!
+
+=== Crisis: Joker’s Drone Swarm ===
+
+[ControlPanel] Activating command...
+[Batman] Launching Batarang to disable the drone swarm!
+
+=== Crisis: Collapsed Subway Tunnel ===
+
+[ControlPanel] Activating command...
+[Flash] Speed-blur rescuing victims in seconds!
+    </code></pre>
+
+    <div style="margin-top:1rem;">
+        <a href="https://github.com/Tharindu714/Design-Patterns-FULL/blob/4ff2bfe2f5eab3fdb8fdf7d9654854c12c07e2c4/src/main/java/com/tharindu/oodp1/Command/CommandPatternDemo.java"
+           target="_blank" style="
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: #c0392b;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-family: 'Segoe UI', sans-serif;">
+            🔗 View Code on GitHub
+        </a>
+    </div>
+</div>
+<br/>
 <div class="heroes">
     <div class="hero">
         <img src="https://freepngimg.com/save/21362-superman-transparent-image/790x1012" alt="Superman"/>
