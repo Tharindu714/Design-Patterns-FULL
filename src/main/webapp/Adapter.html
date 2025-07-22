@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adapter Pattern - SD Card Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f0f4f8;
+            padding: 2rem;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .card-slot {
+            margin-top: 1.5rem;
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .card-slot select, .card-slot button {
+            padding: 0.5rem;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        .card-slot button {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-left: 0.5rem;
+            cursor: pointer;
+        }
+        #log {
+            margin-top: 1rem;
+            background: #ecf0f1;
+            padding: 1rem;
+            border-radius: 10px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            min-height: 100px;
+        }
+    </style>
+</head>
+<body>
+<h1>💻 Adapter Pattern - SD Card Slot</h1>
+<p>Select a card to insert into the laptop. Watch how the Adapter converts Micro SD into SD!</p>
+
+<div class="card-slot">
+    <label for="cardType">Insert Card:</label>
+    <select id="cardType">
+        <option value="sony">Sony SD Card 💾</option>
+        <option value="samsung">Samsung Micro SD Card 🗃️ (via Adapter)</option>
+    </select>
+    <button onclick="insertCard()">Insert</button>
+    <button onclick="viewFile()">View File</button>
+</div>
+
+<div id="log"></div>
+
+<script>
+    class SDCard {
+        readSDCard() {}
+    }
+
+    class SonySD extends SDCard {
+        readSDCard() {
+            appendLog("Reading data from Sony SD Card 💾");
+        }
+    }
+
+    class SamsungMicroSD {
+        readMicroSDCard() {
+            appendLog("Reading data from Samsung Micro SD Card 🗃️");
+        }
+    }
+
+    class Adapter extends SDCard {
+        constructor(microSDCard) {
+            super();
+            this.microSDCard = microSDCard;
+        }
+        readSDCard() {
+            appendLog("💽 Converting Micro SD Card to SD Card format...");
+            this.microSDCard.readMicroSDCard();
+        }
+    }
+
+    class Laptop {
+        setSdCard(sdCard) {
+            this.sdCard = sdCard;
+            appendLog("Card inserted into laptop slot.");
+        }
+        viewFile() {
+            if (this.sdCard) {
+                this.sdCard.readSDCard();
+            } else {
+                appendLog("No card inserted.");
+            }
+        }
+    }
+
+    const laptop = new Laptop();
+
+    function insertCard() {
+        const cardType = document.getElementById("cardType").value;
+        if (cardType === "sony") {
+            laptop.setSdCard(new SonySD());
+        } else if (cardType === "samsung") {
+            laptop.setSdCard(new Adapter(new SamsungMicroSD()));
+        }
+    }
+
+    function viewFile() {
+        laptop.viewFile();
+    }
+
+    function appendLog(message) {
+        const log = document.getElementById("log");
+        log.innerHTML += message + "\n";
+    }
+</script>
+</body>
+</html>

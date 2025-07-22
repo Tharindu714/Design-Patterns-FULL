@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adapter Pattern - Plug & Charger</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fdfcfb;
+            padding: 2rem;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .container {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: auto;
+        }
+        button {
+            padding: 0.6rem 1rem;
+            font-size: 1rem;
+            margin: 0.5rem 0.5rem 0 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #2980b9;
+            color: white;
+        }
+        #log {
+            background: #ecf0f1;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: monospace;
+            min-height: 120px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+<h1>🌏 Adapter Pattern - Plug Converter Demo</h1>
+<div class="container">
+    <p>You brought a US charger to Europe... ⚡ Let's plug it in using an adapter!</p>
+    <button onclick="chargePhone()">Charge Phone</button>
+    <div id="log"></div>
+</div>
+
+<script>
+    class EuropeanSocket {
+        providePower() {}
+    }
+
+    class USCharger {
+        givePower() {
+            appendLog("Power supplied using US standard plug.");
+        }
+    }
+
+    class PlugAdapter extends EuropeanSocket {
+        constructor(usCharger) {
+            super();
+            this.usCharger = usCharger;
+        }
+
+        providePower() {
+            appendLog("Adapting plug to European socket...");
+            this.usCharger.givePower();
+        }
+    }
+
+    class Phone {
+        constructor(socket) {
+            this.socket = socket;
+        }
+
+        charge() {
+            appendLog("\n📱 Phone starts charging...");
+            this.socket.providePower();
+        }
+    }
+
+    function chargePhone() {
+        const usCharger = new USCharger();
+        const adapter = new PlugAdapter(usCharger);
+        const phone = new Phone(adapter);
+        phone.charge();
+    }
+
+    function appendLog(message) {
+        const log = document.getElementById("log");
+        log.innerHTML += message + "\n";
+    }
+</script>
+</body>
+</html>

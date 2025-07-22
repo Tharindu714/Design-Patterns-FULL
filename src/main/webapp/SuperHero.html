@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DC Heroes Command Center</title>
+    <style>
+        body {
+            background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            font-family: 'Segoe UI', sans-serif;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #ffcc00;
+        }
+
+        .button-panel button {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            margin: 1rem;
+            border: none;
+            border-radius: 8px;
+            background-color: #e74c3c;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button-panel button:hover {
+            background-color: #c0392b;
+        }
+
+        .heroes {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero {
+            width: 150px;
+        }
+
+        .hero img {
+            width: 100%;
+            border-radius: 12px;
+            border: 2px solid #fff;
+        }
+
+        #log {
+            background-color: #ffffff11;
+            border: 1px solid #fff2;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 10px;
+            min-height: 150px;
+            font-family: monospace;
+            white-space: pre-wrap;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<h1>🌌 DC Heroes Command Center</h1>
+
+<div class="heroes">
+    <div class="hero">
+        <img src="https://freepngimg.com/save/21362-superman-transparent-image/790x1012" alt="Superman"/>
+        <p>Superman</p>
+    </div>
+    <div class="hero">
+        <img src="https://www.pngarts.com/files/2/Batman-PNG-Image-with-Transparent-Background.png" alt="Batman"/>
+        <p>Batman</p>
+    </div>
+    <div class="hero">
+        <img src="https://www.pngplay.com/wp-content/uploads/13/Flash-Background-PNG-Image.png" alt="Flash"/>
+        <p>Flash</p>
+    </div>
+</div>
+
+<div class="button-panel">
+    <button onclick="triggerCrisis('alien')">🛸 Alien Drone Attack</button>
+    <button onclick="triggerCrisis('joker')">🤡 Joker's Drone Swarm</button>
+    <button onclick="triggerCrisis('subway')">🚇 Collapsed Subway Tunnel</button>
+</div>
+
+<div id="log">[System Ready] Choose a crisis to deploy heroes!</div>
+
+<script>
+    class Superman {
+        flyToCity() {
+            return "[Superman] Flying at hypersonic speed to Metropolis!";
+        }
+
+        rescueCivilians() {
+            return "[Superman] Rescuing civilians from collapsing buildings!";
+        }
+    }
+
+    class Batman {
+        deployBatarang() {
+            return "[Batman] Launching Batarang to disable the drone swarm!";
+        }
+    }
+
+    class Flash {
+        speedRescue() {
+            return "[Flash] Speed-blur rescuing victims in seconds!";
+        }
+    }
+
+    class FlyCommand {
+        constructor(hero) {
+            this.hero = hero;
+        }
+
+        execute() {
+            return [
+                this.hero.flyToCity(),
+                this.hero.rescueCivilians()
+            ];
+        }
+    }
+
+    class BatarangCommand {
+        constructor(hero) {
+            this.hero = hero;
+        }
+
+        execute() {
+            return [this.hero.deployBatarang()];
+        }
+    }
+
+    class SpeedRescueCommand {
+        constructor(hero) {
+            this.hero = hero;
+        }
+
+        execute() {
+            return [this.hero.speedRescue()];
+        }
+    }
+
+    class ControlPanel {
+        setCommand(command) {
+            this.command = command;
+        }
+
+        pressButton() {
+            if (this.command) {
+                return ["[ControlPanel] Activating command...", ...this.command.execute()];
+            } else {
+                return ["[ControlPanel] No command assigned!"];
+            }
+        }
+    }
+
+    function triggerCrisis(type) {
+        const panel = new ControlPanel();
+        let logs = [];
+
+        switch (type) {
+            case 'alien':
+                const superman = new Superman();
+                panel.setCommand(new FlyCommand(superman));
+                logs.push("=== Crisis: 🛸 Alien Drone Attack ===");
+                break;
+            case 'joker':
+                const batman = new Batman();
+                panel.setCommand(new BatarangCommand(batman));
+                logs.push("=== Crisis: 🤡 Joker's Drone Swarm ===");
+                break;
+            case 'subway':
+                const flash = new Flash();
+                panel.setCommand(new SpeedRescueCommand(flash));
+                logs.push("=== Crisis: 🚇 Collapsed Subway Tunnel ===");
+                break;
+        }
+
+        logs.push(...panel.pressButton());
+        document.getElementById("log").textContent = logs.join("\n");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Singleton Pattern - Printer Spooler</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f2f2f7;
+            padding: 2rem;
+            color: #333;
+        }
+        h1 {
+            color: #444;
+        }
+        #printer {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+        input {
+            padding: 0.5rem;
+            width: 300px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            margin-left: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #log {
+            margin-top: 1rem;
+            background: #fff;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            border-radius: 8px;
+            max-height: 250px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+<h1>🖨️ Singleton Pattern - Printer Spooler</h1>
+<p>This demo simulates a single PrinterSpooler instance shared across print jobs.</p>
+
+<div id="printer">
+    <label for="docInput"></label><input type="text" id="docInput" placeholder="Enter document name..." />
+    <button onclick="sendToPrinter()">Print</button>
+    <div id="log"></div>
+</div>
+
+<script>
+    class PrinterSpooler {
+        constructor() {
+            if (PrinterSpooler._instance) {
+                return PrinterSpooler._instance;
+            }
+            this.initializedAt = new Date().toLocaleTimeString();
+            this.logs = [`[INIT] Printer Spooler Initialized at ${this.initializedAt}`];
+            PrinterSpooler._instance = this;
+        }
+
+        print(document) {
+            const logEntry = `[PRINT] Printing: ${document}`;
+            this.logs.push(logEntry);
+            updateLog(this.logs);
+        }
+
+        static getInstance() {
+            if (!PrinterSpooler._instance) {
+                PrinterSpooler._instance = new PrinterSpooler();
+            }
+            return PrinterSpooler._instance;
+        }
+    }
+
+    function sendToPrinter() {
+        const input = document.getElementById('docInput');
+        const docName = input.value.trim();
+        if (!docName) return;
+
+        const spooler = PrinterSpooler.getInstance();
+        spooler.print(docName);
+        input.value = "";
+    }
+
+    function updateLog(logs) {
+        const logDiv = document.getElementById('log');
+        logDiv.innerHTML = logs.map(l => `<div>${l}</div>`).join('');
+    }
+</script>
+</body>
+</html>
