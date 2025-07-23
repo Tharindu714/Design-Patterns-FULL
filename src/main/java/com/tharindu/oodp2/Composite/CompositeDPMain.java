@@ -33,6 +33,7 @@ class DirectoryDP implements FileSystemComponent {
     public void addComponent(FileSystemComponent component) {
         components.add(component);
     }
+
     public void removeComponent(FileSystemComponent component) {
         components.remove(component);
     }
@@ -45,8 +46,22 @@ class DirectoryDP implements FileSystemComponent {
         }
     }
 }
+
 public class CompositeDPMain {
     public static void main(String[] args) {
+        FileSystemComponent fsc1 = new FileDP("Resume.txt", 1.5);
+        FileSystemComponent fsc2 = new FileDP("CV.pdf", 12.8);
+        FileSystemComponent fsc3 = new FileDP("Photo.png", .290);
 
+        DirectoryDP dir1 = new DirectoryDP("My-Files");
+        dir1.addComponent(fsc1);
+        dir1.addComponent(fsc2);
+
+        DirectoryDP dir2 = new DirectoryDP("My-Photos");
+        dir2.addComponent(fsc3);
+        dir2.addComponent(dir1);
+
+        System.out.println("File System Structure:");
+        dir2.showDetails("");
     }
 }
