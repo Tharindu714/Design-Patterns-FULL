@@ -5,9 +5,9 @@ import java.util.List;
 
 class File {
     private final String name;
-    private final int size;
+    private final double size;
 
-    public File(String name, int size) {
+    public File(String name, double size) {
         this.name = name;
         this.size = size;
     }
@@ -16,12 +16,12 @@ class File {
         return name;
     }
 
-    public int getSize() {
+    public double getSize() {
         return size;
     }
 
     public void Open() {
-        System.out.println("Opening file: " + getName());
+        System.out.println("Opening file: " + getName()+ "(" + getSize() + " MB)");
     }
 }
 
@@ -55,6 +55,24 @@ class Directory {
 
 public class FileComposite {
     public static void main(String[] args) {
+        File file1 = new File("Tharindu_CV.docx", 4.5);
+        File file2 = new File("Tharindu_Doc.txt", 10);
+        File file3 = new File("Tharindu_Budget.xlsx", 0.5);
+        File file4 = new File("Tharindu_Presentation.pptx", 2.7);
 
+        Directory subDirectory1 = new Directory("subDirectory_1");
+        subDirectory1.addFile(file2);
+        subDirectory1.addFile(file3);
+
+        Directory subDirectory2 = new Directory("subDirectory_2");
+        subDirectory2.addFile(file1);
+        subDirectory2.addFile(file4);
+
+        Directory mainDirectory = new Directory("root_Directory");
+        mainDirectory.addFile(new File("MyPhoto.jpg", 3.5));
+        mainDirectory.addDirectory(subDirectory1);
+        mainDirectory.addDirectory(subDirectory2);
+
+        mainDirectory.openAll();
     }
 }

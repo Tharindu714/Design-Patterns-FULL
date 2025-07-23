@@ -137,9 +137,87 @@
     <a class="card-btn" href="src/main/webapp/ManageUser.html">🛡️ Proxy Pattern</a>
     <a class="card-btn" href="src/main/webapp/MyGunFactory.html">🔫 Factory Pattern</a>
 </section>
+<section id="feedback-section"
+         style="max-width:800px;margin:2rem auto;padding:1rem;background:rgba(30,29,29,0.76);border-radius:10px;">
+    <h2 style="text-align:center;color:#00e0ff;margin-bottom:1rem;">📝 Student Feedback</h2>
 
+    <!-- Feedback Form -->
+    <form id="feedback-form" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <label for="fb-name"></label><input type="text" id="fb-name" placeholder="Your name" required
+                                            style="padding:0.75rem;border:none;border-radius:6px;background:rgb(30,29,29);color:#fff;"/>
+        <label for="fb-text"></label><textarea id="fb-text" rows="3" placeholder="Your feedback" required
+                                               style="padding:0.75rem;border:none;border-radius:6px;background:rgb(30,29,29);color:#fff;"></textarea>
+        <button type="button" id="fb-submit"
+                style="padding:0.75rem;background:rgba(0,224,255,0.2);color:#ffffff;border:none;border-radius:6px;font-weight:bold;cursor:pointer;transition:background 0.3s;">
+            Submit Feedback
+        </button>
+    </form>
+
+    <!-- Feedback List -->
+    <div id="feedback-list" style="margin-top:2rem;display:flex;flex-direction:column;gap:1rem;"></div>
+</section>
 <div id="footer-container"></div>
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import {
+        getFirestore, collection, addDoc, onSnapshot, query,
+        orderBy, serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore.js";
 
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyBK91Ctrz9IiRas9t30NnwI_IBQCoZLFPs",
+        authDomain: "note-web-tharindu.firebaseapp.com",
+        projectId: "note-web-tharindu",
+        storageBucket: "note-web-tharindu.firebasestorage.app",
+        messagingSenderId: "1019157701275",
+        appId: "1:1019157701275:web:dacd3dac7959d93a8cdc3e",
+        measurementId: "G-29ZRNTDTLT"
+    };
+    // 3) Initialize
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // 4) References
+    const form = document.getElementById("feedback-form");
+    const listDiv = document.getElementById("feedback-list");
+
+    document.getElementById("fb-submit").addEventListener("click", async () => {
+        const name = document.getElementById("fb-name").value.trim();
+        const text = document.getElementById("fb-text").value.trim();
+        if (!name || !text) return;
+        try {
+            await addDoc(collection(db, "feedbacks"), { name, text, createdAt: serverTimestamp() });
+            form.reset();
+        } catch (err) {
+            console.error(err);
+        }
+    });
+    // 6) Real‑time listener
+    const q = query(collection(db, "feedbacks"), orderBy("createdAt", "desc"));
+    onSnapshot(q, snapshot => {
+        listDiv.innerHTML = "";  // clear
+        snapshot.forEach(doc => {
+            const {name, text} = doc.data();
+            // default avatar
+            // const avatarUrl = "https://i.pravatar.cc/50?u=" + encodeURIComponent(name);
+            // const avatarUrl = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`;
+            const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=random&color=fff&size=50`;
+
+            const card = document.createElement("div");
+            card.style = "display:flex;gap:0.75rem;align-items:flex-start;background:rgba(255,255,255,0.1);padding:0.75rem;border-radius:6px;";
+            card.innerHTML = `
+        <img src="${avatarUrl}" width="50" height="50" style="border-radius:50%;">
+        <div>
+          <strong style="color:#00e0ff;">${name}</strong>
+          <p style="margin:0.25rem 0 0;color:#ddd;">${text}</p>
+        </div>
+      `;
+            listDiv.appendChild(card);
+        });
+    });
+</script>
 <script>
     fetch("src/main/webapp/footer.html")
         .then(res => res.text())

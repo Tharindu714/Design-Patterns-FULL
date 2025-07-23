@@ -18,5 +18,30 @@
       </option>
       <option name="myCustomValuesEnabled" value="true" />
     </inspection_tool>
+    <inspection_tool class="JSFileReferences" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="VulnerableLibrariesLocal" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="isIgnoringEnabled" value="true" />
+      <option name="ignoredModules">
+        <list>
+          <option value="DesignPatterns" />
+          <option value="DesignPatterns" />
+          <option value="DesignPatterns" />
+        </list>
+      </option>
+      <option name="ignoredPackages">
+        <list>
+          <option value="com.google.protobuf:protobuf-java:3.21.8" />
+          <option value="com.fasterxml.jackson.core:jackson-core:2.13.4" />
+          <option value="com.google.guava:guava:31.1-jre" />
+        </list>
+      </option>
+      <option name="ignoredReasons">
+        <list>
+          <option value="In progress" />
+          <option value="Not exploitable" />
+          <option value="Fixed in branch" />
+        </list>
+      </option>
+    </inspection_tool>
   </profile>
 </component>
