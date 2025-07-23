@@ -7,18 +7,18 @@
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: #fdfcfb;
+            background: #000217;
             padding: 2rem;
-            color: #333;
+            color: #ffffff;
         }
         h1 {
-            color: #2c3e50;
+            color: #c4e3fd;
         }
         .container {
-            background: #fff;
+            background: #1e1d1d;
             border-radius: 12px;
             padding: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgb(186, 185, 185);
             max-width: 600px;
             margin: auto;
         }
@@ -50,7 +50,8 @@
             color: white;
         }
         #log {
-            background: #ecf0f1;
+            background: #000000;
+            color: #29ff00;
             margin-top: 1rem;
             padding: 1rem;
             border-radius: 8px;
@@ -60,6 +61,7 @@
         }
         .description {
             padding: 1.5rem;
+            background: rgba(9, 8, 8, 0.5);
             border-left: 6px solid #1976d2;
             border-radius: 8px;
             margin-bottom: 2rem;
@@ -153,7 +155,16 @@ Power supplied using US standard plug.
     <button onclick="chargePhone()">Charge Phone</button>
     <div id="log"></div>
 </div>
-
+<br/>
+<div id="footer-container" style="
+  position: absolute;
+  left: 49.3%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 <script>
     class EuropeanSocket {
         providePower() {}
@@ -199,9 +210,11 @@ Power supplied using US standard plug.
         const log = document.getElementById("log");
         log.innerHTML += message + "\n";
     }
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
 </script>
-<footer>
-    Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
 </body>
 </html>

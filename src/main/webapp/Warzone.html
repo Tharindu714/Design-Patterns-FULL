@@ -103,12 +103,34 @@
             border-radius: 6px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
+        header {
+            padding: 1rem 2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* new: center contents */
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo {
+            width: 64px;
+            height: auto;
+        }
     </style>
 </head>
 <body>
+<header>
+    <div class="header-inner">
+        <img class="logo" src="https://freepngimg.com/save/21132-call-of-duty-black-ops/512x512" alt="ops Logo">
+        <h1>State Design Pattern: Shadow Ops</h1>
+    </div>
+</header>
 <div class="description">
-    <h2>📊 State Design Pattern: Shadow Ops — Stealth Guard AI</h2>
-
     <p><strong>📘 Scenario:</strong></p>
     <p>
         In the neon-lit city of <em>Neo Aegis</em>, stealth drones patrol government facilities. Each drone (the <strong>Context</strong>) operates in three distinct modes:
@@ -185,8 +207,22 @@
 
     <div id="log">[LOG] Guard initialized and ready to patrol.</div>
 </div>
-
+<br/>
+<div id="footer-container" style="
+  position: absolute;
+  left: 49.3%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 <script>
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
     class State {
         handleInput(guard, input) {
         }
@@ -296,8 +332,5 @@
         }
     }
 </script>
-<footer>
-    Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
 </body>
 </html>

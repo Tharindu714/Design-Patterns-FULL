@@ -6,7 +6,7 @@
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(to right, #1e3c72, #2a5298);
+            background: linear-gradient(to right, #091f45, #2a5298);
             margin: 0;
             padding: 0;
             color: #fff;
@@ -23,7 +23,7 @@
         }
 
         header {
-            background: linear-gradient(to right, #1e3c72, #2a5298);
+            background: linear-gradient(to right, #091f45, #2a5298);
             padding: 1rem 2rem;
             /* new: center contents */
             display: flex;
@@ -88,7 +88,7 @@
         }
 
         .description {
-            background-color: #0f0f0f;
+            background: rgba(9, 8, 8, 0.5);
             padding: 1.5rem;
             border-left: 6px solid #1976d2;
             border-radius: 8px;
@@ -199,8 +199,22 @@ Paid Rs. 12000.0 using Cryptocurrency.
 
     <div id="output">🧾 Payment summary will appear here...</div>
 </div>
-
+<br/>
+<div id="footer-container" style="
+  position: absolute;
+  left: 49.3%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 <script>
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
     function payNow() {
         const amount = document.getElementById("amount").value;
         const method = document.getElementById("method").value;
@@ -230,8 +244,5 @@ Paid Rs. 12000.0 using Cryptocurrency.
         output.textContent = message;
     }
 </script>
-<footer>
-    Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
 </body>
 </html>

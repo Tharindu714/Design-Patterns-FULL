@@ -6,7 +6,7 @@
     <title>DC Heroes Command Center</title>
     <style>
         body {
-            background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+            background: radial-gradient(circle at top, #0f2027, #203a43, #1a3f50);
             color: #fff;
             font-family: 'Segoe UI', sans-serif;
 
@@ -82,6 +82,14 @@
             letter-spacing: 2px;
             box-shadow: 0 0 15px black;
         }
+        .description {
+            padding: 1.5rem;
+            background: rgba(9, 8, 8, 0.5);
+            border-left: 6px solid #1976d2;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
         .uml-image {
             margin: 1rem 0;
             text-align: center;
@@ -97,7 +105,7 @@
 </head>
 <body>
 <header>
-    🌌 Commando Design pattern - Crisis at Metropolis
+    🌌 Commando Design pattern—Crisis at Metropolis
 </header>
 <div class="description">
     <p><strong>📘 Scenario:</strong></p>
@@ -187,8 +195,23 @@
 </div>
 
 <div id="log">[System Ready] Choose a crisis to deploy heroes!</div>
+<br/>
+<div id="footer-container" style="
+  position: absolute;
+  left: 49.3%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 
 <script>
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
     class Superman {
         flyToCity() {
             return "[Superman] Flying at hypersonic speed to Metropolis!";
@@ -284,8 +307,5 @@
         document.getElementById("log").textContent = logs.join("\n");
     }
 </script>
-<footer>
-    Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
 </body>
 </html>

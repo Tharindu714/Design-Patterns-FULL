@@ -7,13 +7,11 @@
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: #f0f4f8;
-            padding: 2rem;
-            color: #333;
+            background: #001e33;
+            padding: 1rem;
+            color: #c4e3fd;
         }
         header {
-            padding: 1rem 2rem;
-            /* new: center contents */
             display: flex;
             justify-content: center;
         }
@@ -29,11 +27,12 @@
             height: auto;
         }
         h1 {
-            color: #2c3e50;
+            color: #b8dfff;
         }
         .card-slot {
             margin-top: 1.5rem;
-            background: #ffffff;
+            background: #2d2d2d;
+            font-weight: bold;
             border-radius: 10px;
             padding: 1rem;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -53,7 +52,8 @@
         }
         #log {
             margin-top: 1rem;
-            background: #ecf0f1;
+            background: #000000;
+            color: #29ff00;
             padding: 1rem;
             border-radius: 10px;
             font-family: monospace;
@@ -62,6 +62,7 @@
         }
         .description {
             padding: 1.5rem;
+            background: rgba(9, 8, 8, 0.5);
             border-left: 6px solid #1976d2;
             border-radius: 8px;
             margin-bottom: 2rem;
@@ -162,8 +163,23 @@ Reading data from Samsung Micro SD Card 🗃️
 </div>
 
 <div id="log"></div>
+<br/>
+<div id="footer-container" style="
+  position: absolute;
+  left: 49.3%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 
 <script>
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
     class SDCard {
         readSDCard() {}
     }
@@ -225,8 +241,6 @@ Reading data from Samsung Micro SD Card 🗃️
         log.innerHTML += message + "\n";
     }
 </script>
-<footer>
-    Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
+
 </body>
 </html>

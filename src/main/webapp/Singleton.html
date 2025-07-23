@@ -7,9 +7,9 @@
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background: #9dcaef;
+            background: #01111c;
             padding: 2rem;
-            color: #1e3a5f;
+            color: #1976d2;
         }
 
         header {
@@ -29,7 +29,8 @@
         }
 
         .description {
-            background: #ffffff;
+            background: rgba(9, 8, 8, 0.5);
+            color: #ffffff;
             padding: 1.5rem;
             border-left: 6px solid #1976d2;
             border-radius: 8px;
@@ -58,10 +59,10 @@
         }
 
         #printer {
-            background: #ffffff;
+            background: #1e1d1d;
             padding: 1.5rem;
             border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
         }
 
         input {
@@ -94,14 +95,14 @@
 
         #log {
             margin-top: 1.5rem;
-            background: #f9fbe7;
+            background: #000000;
             border: 1px solid #dce775;
             padding: 1rem;
             border-radius: 8px;
             max-height: 300px;
             overflow-y: auto;
             font-family: 'Courier New', monospace;
-            color: #33691e;
+            color: #29ff00;
         }
 
         #log div {
@@ -173,7 +174,16 @@ true
     <button onclick="sendToPrinter()">Print</button>
     <div id="log"></div>
 </div>
-
+<br/>
+<div id="footer-container" style="
+  position: absolute;
+  left: 49.3%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 <script>
     class PrinterSpooler {
         constructor() {
@@ -213,9 +223,11 @@ true
         const logDiv = document.getElementById('log');
         logDiv.innerHTML = logs.map(l => `<div>${l}</div>`).join('');
     }
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
 </script>
-<footer>
-    Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
 </body>
 </html>

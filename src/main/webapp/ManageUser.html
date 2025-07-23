@@ -11,7 +11,7 @@
 
     body {
       margin: 0;
-      background: linear-gradient(to right, #1f4037, #016161);
+      background: linear-gradient(to right, #1f4037, #014e4e);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -37,14 +37,13 @@
     }
 
     .description {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(9, 8, 8, 0.5);
       backdrop-filter: blur(8px);
       color: #fff;
       padding: 1.5rem;
       border-left: 6px solid #1976d2;
       border-radius: 10px;
-      width: 90%;
-      max-width: 800px;
+      width:100%;
       margin-bottom: 2rem;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
     }
@@ -223,7 +222,16 @@
 
   <div id="console">[Console Output]</div>
 </div>
-
+<br/>
+<div id="footer-container" style="
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 <script>
   class RealDatabase {
     insert() {
@@ -324,9 +332,11 @@
     consoleBox.textContent += '\n' + message;
     consoleBox.scrollTop = consoleBox.scrollHeight;
   }
+  fetch("footer.html")
+          .then(res => res.text())
+          .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+          });
 </script>
-<footer>
-  Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
 </body>
 </html>

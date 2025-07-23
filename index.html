@@ -1,153 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>🎯 Object Oriented Design Patterns Showcase</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@400;700&display=swap');
+    <meta charset="UTF-8"/>
+    <title>🎯 Object Oriented Design Patterns Showcase</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Poppins:wght@400;700&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #000428, #004e92);
-      color: #fff;
-      overflow-x: hidden;
-    }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #000319, #004e92);
+            color: #fff;
+            overflow-x: hidden;
+        }
 
-    header {
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(6px);
-    }
+        header {
+            text-align: center;
+            padding: 3rem 1rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(6px);
+        }
 
-    header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 3rem;
-      color: #00e0ff;
-      margin-bottom: 1rem;
-    }
+        header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            color: #00e0ff;
+            margin-bottom: 1rem;
+        }
 
-    header p {
-      font-size: 1.2rem;
-      color: #ccc;
-    }
+        header p {
+            font-size: 1.2rem;
+            color: #ccc;
+        }
 
-    .carousel {
-      margin: 2rem auto;
-      max-width: 1000px;
-      overflow: hidden;
-      border-radius: 20px;
-      position: relative;
-    }
+        .carousel {
+            margin: 2rem auto;
+            max-width: 1000px;
+            overflow: hidden;
+            border-radius: 20px;
+            position: relative;
+        }
 
-    .carousel img {
-      width: 100%;
-      display: none;
-      animation: fade 1s ease-in-out;
-    }
+        .carousel img {
+            width: 100%;
+            display: none;
+            animation: fade 1s ease-in-out;
+        }
 
-    .carousel img.active {
-      display: block;
-    }
+        .carousel img.active {
+            display: block;
+        }
 
-    @keyframes fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
+        @keyframes fade {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-    .card-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border: 2px solid #00e0ff;
-      color: #fff;
-      padding: 1.2rem;
-      border-radius: 12px;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 0 20px rgba(0, 224, 255, 0.2);
-      text-decoration: none;
-    }
+        .card-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #00e0ff;
+            color: #fff;
+            padding: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 0 20px rgba(0, 224, 255, 0.2);
+            text-decoration: none;
+        }
 
-    .card-btn:hover {
-      background-color: #00e0ff;
-      color: #000;
-      transform: translateY(-4px);
-    }
+        .card-btn:hover {
+            background-color: #00e0ff;
+            color: #000;
+            transform: translateY(-4px);
+        }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #ccc;
-      font-size: 0.9rem;
-    }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #ccc;
+            font-size: 0.9rem;
+        }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-    }
-  </style>
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <header>
-  <h1>🎯 Object Oriented Design Patterns Vault</h1>
-  <p>Explore all 11 patterns with animated real-life examples & themed designs</p>
+    <h1>🎯 Object Oriented Design Patterns Vault</h1>
+    <p>Explore all 11 patterns with animated real-life examples & themed designs</p>
 </header>
 
 <section class="carousel">
-  <img src="https://static.wixstatic.com/media/353803_56f4babad5cc4a0faae91bb5e72808eb~mv2.jpg/v1/fill/w_568,h_320,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/353803_56f4babad5cc4a0faae91bb5e72808eb~mv2.jpg" class="active" alt="OOP Concept 1">
-  <img src="https://miro.medium.com/v2/resize:fit:1400/1*_qEU6A8X9na686Yy7Jnzlg.png" alt="OOP Concept 2">
-  <img src="https://muellif.publisist.az/public/images/blog/63b4a216bbc08.png" alt="OOP Concept 3">
+    <img src="https://static.wixstatic.com/media/353803_56f4babad5cc4a0faae91bb5e72808eb~mv2.jpg/v1/fill/w_568,h_320,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/353803_56f4babad5cc4a0faae91bb5e72808eb~mv2.jpg"
+         class="active" alt="OOP Concept 1">
+    <img src="https://miro.medium.com/v2/resize:fit:1400/1*_qEU6A8X9na686Yy7Jnzlg.png" alt="OOP Concept 2">
+    <img src="https://muellif.publisist.az/public/images/blog/63b4a216bbc08.png" alt="OOP Concept 3">
 </section>
 
 <section class="grid">
-  <a class="card-btn" href="src/main/webapp/Singleton.html">🖨️ Singleton Pattern</a>
-  <a class="card-btn" href="src/main/webapp/Adapter.html">🔌 Adapter Pattern 1</a>
-  <a class="card-btn" href="src/main/webapp/ChargingAdapter.html">💡 Adapter Pattern 2</a>
-  <a class="card-btn" href="src/main/webapp/MovieNight.html">🎬 Facade Pattern</a>
-  <a class="card-btn" href="src/main/webapp/SuperHero.html">🦸‍♂️ Command Pattern</a>
-  <a class="card-btn" href="src/main/webapp/payment-strategy.html">💳 Strategy Pattern</a>
-  <a class="card-btn" href="src/main/webapp/Warzone.html">⚔️ State Pattern</a>
-  <a class="card-btn" href="src/main/webapp/SherlockObserver.html">🔍 Observer Pattern</a>
-  <a class="card-btn" href="src/main/webapp/DJNight.html">🎧 Iterator Pattern</a>
-  <a class="card-btn" href="src/main/webapp/gameTemplate.html">🧙 Template Method</a>
-  <a class="card-btn" href="src/main/webapp/ManageUser.html">🛡️ Proxy Pattern</a>
-  <a class="card-btn" href="src/main/webapp/MyGunFactory.html">🔫 Factory Pattern</a>
+    <a class="card-btn" href="src/main/webapp/Singleton.html">🖨️ Singleton Pattern</a>
+    <a class="card-btn" href="src/main/webapp/Adapter.html">🔌 Adapter Pattern 1</a>
+    <a class="card-btn" href="src/main/webapp/ChargingAdapter.html">💡 Adapter Pattern 2</a>
+    <a class="card-btn" href="src/main/webapp/MovieNight.html">🎬 Facade Pattern</a>
+    <a class="card-btn" href="src/main/webapp/SuperHero.html">🦸‍♂️ Command Pattern</a>
+    <a class="card-btn" href="src/main/webapp/payment-strategy.html">💳 Strategy Pattern</a>
+    <a class="card-btn" href="src/main/webapp/Warzone.html">⚔️ State Pattern</a>
+    <a class="card-btn" href="src/main/webapp/SherlockObserver.html">🔍 Observer Pattern</a>
+    <a class="card-btn" href="src/main/webapp/DJNight.html">🎧 Iterator Pattern</a>
+    <a class="card-btn" href="src/main/webapp/gameTemplate.html">🧙 Template Method</a>
+    <a class="card-btn" href="src/main/webapp/ManageUser.html">🛡️ Proxy Pattern</a>
+    <a class="card-btn" href="src/main/webapp/MyGunFactory.html">🔫 Factory Pattern</a>
 </section>
 
-<footer>
-  Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
+<div id="footer-container"></div>
 
 <script>
-  const slides = document.querySelectorAll(".carousel img");
-  let current = 0;
+    fetch("src/main/webapp/footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
 
-  function cycleSlides() {
-    slides[current].classList.remove("active");
-    current = (current + 1) % slides.length;
-    slides[current].classList.add("active");
-  }
+    const slides = document.querySelectorAll(".carousel img");
+    let current = 0;
 
-  setInterval(cycleSlides, 3000);
+    function cycleSlides() {
+        slides[current].classList.remove("active");
+        current = (current + 1) % slides.length;
+        slides[current].classList.add("active");
+    }
+
+    setInterval(cycleSlides, 3000);
 </script>
 </body>
 </html>

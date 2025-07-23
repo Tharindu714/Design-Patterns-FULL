@@ -85,7 +85,7 @@
         .description {
             background: rgba(0, 0, 0, 0.7);
             padding: 1.5rem;
-            border-left: 6px solid #1976d2;
+            border-left: 6px solid #f5c518;
             border-radius: 8px;
             margin-bottom: 2rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -110,8 +110,7 @@
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
         header {
-            padding: 1rem 2rem;
-            background-color: #0f0f0f;
+            background: rgba(0, 0, 0, 0.7);
             /* new: center contents */
             display: flex;
             justify-content: center;
@@ -230,8 +229,22 @@
 
     <div id="log">📝 Ritual Log will appear here...</div>
 </div>
-
+<br/>
+<div id="footer-container" style="
+  position: absolute;
+  left: 49.3%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 <script>
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
     function startRitual(hero) {
         const log = document.getElementById("log");
         log.textContent = "📝 Initiating battle ritual...\n";
@@ -259,8 +272,5 @@
         }
     }
 </script>
-<footer>
-    Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
 </body>
 </html>

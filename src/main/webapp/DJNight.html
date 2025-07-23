@@ -141,6 +141,16 @@ Now playing: "Strobe" by deadmau5
 
     <div class="deck"></div>
 </div>
+<br/>
+<div id="footer-container" style="
+  position: absolute;
+  left: 49.3%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 
 <script>
     class Song {
@@ -199,9 +209,11 @@ Now playing: "Strobe" by deadmau5
             log.textContent += "\n=== Playlist Complete ===";
         }
     }
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
 </script>
-<footer>
-    Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
 </body>
 </html>

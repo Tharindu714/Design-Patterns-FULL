@@ -68,7 +68,7 @@
         }
         .description {
             padding: 1.5rem;
-            border-left: 6px solid #1976d2;
+            border-left: 6px solid #e50914;
             border-radius: 8px;
             margin-bottom: 2rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
@@ -178,8 +178,22 @@ Shutting down the theater...
 
     <div id="log">[System Ready] Press "Watch Movie" to begin.</div>
 </div>
-
+<br/>
+<div id="footer-container" style="
+  position: absolute;
+  left: 49.3%;
+  transform: translateX(-50%);
+  width: 100vw;
+  overflow-y: hidden !important;
+  box-sizing: border-box;
+">
+</div>
 <script>
+    fetch("footer.html")
+        .then(res => res.text())
+        .then(data => {
+            document.getElementById("footer-container").innerHTML = data;
+        });
     class TV {
         on() {
             return "TV turned on";
@@ -265,8 +279,5 @@ Shutting down the theater...
         document.getElementById("log").textContent = lines.join("\n");
     }
 </script>
-<footer>
-    Built with ❤️ by Tharindu714 — OODP1 Final Showcase
-</footer>
 </body>
 </html>
