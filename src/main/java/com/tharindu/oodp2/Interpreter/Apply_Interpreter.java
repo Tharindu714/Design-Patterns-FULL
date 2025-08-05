@@ -105,6 +105,11 @@ class ExpressionParser {
     /**
      * Parse a space‐delimited *infix* expression INTO an Expression tree.
      * Does *not* itself interpret; just builds the tree.
+     * <p>
+     * *සිංහල Explanation*
+     * String value එකක් space එකකින් split කරලා එන values ටික,
+     * Tree structure එකකට store කරලා format කරන්නේ මෙතනින්...
+     * </p>
      */
     public static Expression parse(String expression) {
         String[] tokens = expression.split(" ");
