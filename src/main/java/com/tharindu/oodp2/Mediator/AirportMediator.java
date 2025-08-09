@@ -1,11 +1,12 @@
 package com.tharindu.oodp2.Mediator;
 
-interface ATCTower{
+interface ATCTower {
     void requestTakeoff(Plane airplane);
+
     void requestLanding(Plane airplane);
 }
 
-class Controller implements ATCTower{
+class Controller implements ATCTower {
     @Override
     public void requestTakeoff(Plane airplane) {
         airplane.notifyATC("Requesting to take off");
@@ -17,13 +18,17 @@ class Controller implements ATCTower{
     }
 }
 
-interface Plane{
+//Colleague interface
+interface Plane {
     void takeOff();
+
     void landing();
+
     void notifyATC(String message);
 }
 
-class PrivateJet implements Plane{
+//Concrete Colleague
+class PrivateJet implements Plane {
     private final ATCTower mediator;
 
     public PrivateJet(ATCTower mediator) {
@@ -37,7 +42,7 @@ class PrivateJet implements Plane{
 
     @Override
     public void landing() {
-    mediator.requestLanding(this);
+        mediator.requestLanding(this);
     }
 
     @Override
@@ -48,7 +53,7 @@ class PrivateJet implements Plane{
 
 public class AirportMediator {
     public static void main(String[] args) {
-        ATCTower tower =new Controller();
+        ATCTower tower = new Controller();
 
         Plane plan1 = new PrivateJet(tower);
         Plane plan2 = new PrivateJet(tower);
@@ -56,5 +61,13 @@ public class AirportMediator {
 
         plan1.landing();
         plan2.takeOff();
+        plan3.notifyATC("Alpha 123 is ready for takeoff");
     }
 }
+
+/*Output:
+Private Jet: Requesting to land
+Private Jet: Requesting to take off
+Private Jet: Alpha 123 is ready for takeoff
+*/
+

@@ -3,21 +3,22 @@ package com.tharindu.oodp2.Mediator;
 import java.util.ArrayList;
 import java.util.List;
 
-interface Mediator{
+interface Mediator {
     void sendMessage(String message, User sender);
+
     void addUser(User user);
 }
 
 
 //concrete mediator
-class ChatRoom implements Mediator{
-    private final List<User> users=new ArrayList<>();
+class ChatRoom implements Mediator {
+    private final List<User> users = new ArrayList<>();
 
     @Override
     public void sendMessage(String message, User sender) {
-        for (User user:users){
-            if (user != sender){
-                user.receive(message,sender.getName());
+        for (User user : users) {
+            if (user != sender) {
+                user.receive(message, sender.getName());
             }
         }
     }
@@ -29,7 +30,7 @@ class ChatRoom implements Mediator{
 }
 
 //colleague
-class User{
+class User {
     String name;
     Mediator mediator;
 
@@ -42,22 +43,22 @@ class User{
         return name;
     }
 
-    public void send(String message){
+    public void send(String message) {
         mediator.sendMessage(message, this);
     }
 
-    public void receive(String message,String senderName){
-        System.out.println(senderName+" to "+name+" : "+message);
+    public void receive(String message, String senderName) {
+        System.out.println(senderName + " to " + name + " : " + message);
     }
 }
 
 public class ChatApp {
     public static void main(String[] args) {
-        ChatRoom chatRoom=new ChatRoom();
+        ChatRoom chatRoom = new ChatRoom();
 
-        User Maxine=new User("Maxine", chatRoom);
-        User Andrew=new User("Andrew", chatRoom);
-        User Jacob=new User("Jacob", chatRoom);
+        User Maxine = new User("Maxine", chatRoom);
+        User Andrew = new User("Andrew", chatRoom);
+        User Jacob = new User("Jacob", chatRoom);
 
         chatRoom.addUser(Maxine);
         chatRoom.addUser(Andrew);
