@@ -504,4 +504,4 @@ MIT © 2025 Tharindu714
 
 ---
 
-> Learn by doing—master design patterns with real code examples! 🚀
+> Learn by doing—primary design patterns with real code examples! 🚀
